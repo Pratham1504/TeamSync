@@ -6,7 +6,7 @@ const {
     createProject,
     deleteProject,
     updateProject
-} = require('../controllers.js/projectController')
+} = require('../controllers/projectController')
 const requireAuth = require('../middleware/requireAuth')
 
 // require auth for all project routes

@@ -5,7 +5,7 @@ import  Task from "./Task";
 import './Landing.css'
 
 
-const Home=()=>{
+const Landing=()=>{
 return(
     <>
     <div>
@@ -26,4 +26,4 @@ return(
 )
 }
 
-export default Home;
+export default Landing;

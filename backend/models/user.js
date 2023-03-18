@@ -66,8 +66,6 @@ const user = new schema({
 
 })
 
-<<<<<<< HEAD
-=======
 // static signup method
 user.statics.signup = async function (prop){
 
@@ -113,5 +111,4 @@ user.statics.login = async function (prop) {
     return user
 }
 
->>>>>>> 18a959cc04662fc08ceb9afaecbae6abe2b87c5c
 module.exports = mongoose.model('user', user);

@@ -5,6 +5,8 @@ const express = require('express');
 
 // import routes 
 const projectRoutes = require('./routes/project')
+const userRoutes = require('./routes/user')
+
 const organisationRoutes=require('./routes/organisation')
 
 
@@ -21,6 +23,7 @@ app.use((req,res,next)=>{
 
 //routes
 app.use('/projects/',projectRoutes)
+app.use('/user/',userRoutes)
 app.use('/organisation/',organisationRoutes)
 
 

@@ -1,12 +1,12 @@
 const express = require('express')
 const router = express.Router()
 const {
+    getProject,
+    getProjects,
     createProject,
-    getProject,
-    getProject,
     deleteProject,
     updateProject
-} = require('../controllers/productController')
+} = require('../controllers.js/projectController')
 const requireAuth = require('../middleware/requireAuth')
 
 // require auth for all project routes
@@ -16,7 +16,7 @@ router.use(requireAuth)
 router.get('/',getProject)
  
 //GET a single project 
-router.get('/:id',getProject)
+router.get('/:id',getProjects)
 
 //POST a new project
 router.post('/', createProject)

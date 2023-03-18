@@ -2,9 +2,14 @@ const mongoose = require('mongoose');
 const schema = mongoose.Schema;
 
 const board = new schema({
-    Name: {
+    name: {
         required: true,
         type: String
+    },
+
+    description:{
+        required :true,
+        type:string
     },
 
     createdAt: {
@@ -14,44 +19,35 @@ const board = new schema({
     },
 
     updatedAt: {
-        required: true,
         type: Date,
         default:Date.now()
     },
 
-    employeeList:[
-        {
+    createdBy:{
             required: true,
-            type: mongoose.Schema.Types.ObjectId, ref: `User`,
-
-        }
-    ],
+            type: mongoose.Schema.Types.ObjectId, ref: `User`
+    },
 
     managerList:[
         {
             required: true,
-            type: mongoose.Schema.Types.ObjectId, ref: `User`,
+            type: mongoose.Schema.Types.ObjectId, ref: `User`
 
         }
     ],
-
-    image: {
-        required: true,
-        type: String,
-    },
 
     tasks:[
         {
             required: true,
-            type: mongoose.Schema.Types.ObjectId, ref: `Project`,
+            type: mongoose.Schema.Types.ObjectId, ref: `task`,
         }
     ],
-    members:[
-        {
-            required:true,
-            type:mongoose.Schema.Types.ObjectId, ref: `user`,
-        }
-    ]
+
+    projectId:{
+        required: true,
+        type: mongoose.Schema.Types.ObjectId, ref: `project`,
+    }
+   
 
 })
 

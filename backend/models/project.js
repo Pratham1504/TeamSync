@@ -2,9 +2,14 @@ const mongoose = require('mongoose');
 const schema = mongoose.Schema;
 
 const project = new schema({
-    Name: {
+    name: {
         required: true,
         type: String
+    },
+
+    description:{
+        required :true,
+        type:string
     },
 
     createdAt: {
@@ -13,8 +18,12 @@ const project = new schema({
         default:Date.now()
     },
 
+    createdBy:{
+        required:true,
+        type:mongoose.Schema.Types.ObjectId, ref: `user`
+    },
+
     updatedAt: {
-        required: true,
         type: Date,
         default:Date.now()
     },
@@ -31,7 +40,12 @@ const project = new schema({
             required:true,
             type:mongoose.Schema.Types.ObjectId, ref: `user`,
         }
-    ]
+    ],
+
+    orgId:{
+        required:true,
+        type:mongoose.Schema.Types.ObjectId, ref: `organisation`,
+    }
 
 })
 

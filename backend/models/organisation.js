@@ -9,18 +9,24 @@ const organisation = new schema({
 
     createdAt: {
         required: true,
-        type: Date
+        type: Date,
+        default:Date.now()
     },
 
-    don:{
+    updatedAt: {
+        type: Date,
+        default:Date.now()
+    },
+
+    createdBy:{
                 required:true,
                 type:String,
     },
-    employeeList:[
-        {
-            required: true,
-            type: mongoose.Schema.Types.ObjectId, ref: `User`,
 
+    members:[
+        {
+            required:true,
+            type:mongoose.Schema.Types.ObjectId, ref: `user`,
         }
     ],
 
@@ -32,13 +38,14 @@ const organisation = new schema({
     projects:[
         {
             required: true,
-            type: mongoose.Schema.Types.ObjectId, ref: `Project`,
+            type: mongoose.Schema.Types.ObjectId, ref: `project`,
         }
     ],
+
     membersInvited:[
         {
             required:true,
-            type:mongoose.Schema.Types.ObjectId, ref: `Invites`,
+            type:mongoose.Schema.Types.ObjectId, ref: `userInvite`,
         }
     ]
 

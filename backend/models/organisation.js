@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const schema = mongoose.Schema;
 
 const organisation = new schema({
-    orgName: {
+    name: {
         required: true,
         type: String
     },
@@ -12,7 +12,7 @@ const organisation = new schema({
         type: Date
     },
 
-    organisationDon:{
+    don:{
                 required:true,
                 type:String,
     },

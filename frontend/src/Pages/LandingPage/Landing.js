@@ -1,11 +1,15 @@
-import React from "react"
+import React from "react";
+import Organisation from "./components/Organisation";
+import Invites from "./components/Invites";
+import  Task from "./components/Task";
+
 
 const Home=()=>{
 return(
     <>
     <div>
         <div>
-            <Navbar/>
+        
         </div>
         <div>
             <Organisation/>

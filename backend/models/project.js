@@ -1,6 +1,9 @@
 const mongoose = require('mongoose');
 const schema = mongoose.Schema;
 
+const date = new Date()
+
+
 const project = new schema({
     name: {
         required: true,
@@ -9,13 +12,13 @@ const project = new schema({
 
     description:{
         required :true,
-        type:string
+        type:String
     },
 
     createdAt: {
         required: true,
-        type: Date,
-        default:Date.now()
+        type: String,
+        default:date.toLocaleString()
     },
 
     createdBy:{
@@ -24,8 +27,8 @@ const project = new schema({
     },
 
     updatedAt: {
-        type: Date,
-        default:Date.now()
+        type: String,
+        default:date.toLocaleString()
     },
     
     boards:[

@@ -1,7 +1,8 @@
 import React from "react";
-import Organisation from "./components/Organisation";
-import Invites from "./components/Invites";
-import  Task from "./components/Task";
+import Organisation from "./Organisation";
+import Invites from "./Invites";
+import  Task from "./Task";
+import './Landing.css'
 
 
 const Home=()=>{

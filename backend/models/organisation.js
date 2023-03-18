@@ -19,8 +19,8 @@ const organisation = new schema({
     },
 
     createdBy:{
-                required:true,
-                type:String,
+        required:true,
+        type:mongoose.Schema.Types.ObjectId, ref: `user`
     },
 
     members:[
@@ -44,7 +44,6 @@ const organisation = new schema({
 
     membersInvited:[
         {
-            required:true,
             type:mongoose.Schema.Types.ObjectId, ref: `userInvite`,
         }
     ]

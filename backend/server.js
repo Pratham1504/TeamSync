@@ -5,6 +5,8 @@ const express = require('express');
 
 // import routes 
 const projectRoutes = require('./routes/project')
+const taskRoutes = require('./routes/task')
+const boardRoutes = require('./routes/board')
 
 //express app
 const app = express();
@@ -18,6 +20,8 @@ app.use((req,res,next)=>{
 
 //routes
 app.use('/projects/',projectRoutes)
+app.use('/tasks/',taskRoutes)
+app.use('/boards/',boardRoutes)
 
 
 //connect to db

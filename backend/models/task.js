@@ -31,12 +31,12 @@ const task = new schema({
     ],
 
     boardId:{
-        required:true,
+        // required:true,
         type:mongoose.Schema.Types.ObjectId, ref: `board`,
     },
 
     assignedBy:{
-        required:true,
+        // required:true,
         type:mongoose.Schema.Types.ObjectId, ref: `user`,
     },
 

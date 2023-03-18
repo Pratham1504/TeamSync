@@ -66,4 +66,4 @@ const user = new schema({
 
 })
 
-module.exports = mongoose.model('organisation', organisation);
+module.exports = mongoose.model('user', user);

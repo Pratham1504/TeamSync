@@ -9,7 +9,7 @@ const board = new schema({
 
     description:{
         required :true,
-        type:string
+        type:String
     },
 
     createdAt: {

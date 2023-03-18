@@ -2,14 +2,14 @@ const Project = require('../models/project')
 const mongoose = require('mongoose')
 
 // Get all projects 
-const getProject = async (req,res) =>{
+const getProjects = async (req,res) =>{
 
     const project = await Project.find()
     res.status(200).json(project)
 }
- 
+
 // Get a single project
-const getProjects = async (req,res) =>{
+const getProject = async (req,res) =>{
     const {id} = req.params
     if(!mongoose.Types.ObjectId.isValid(id))
     {

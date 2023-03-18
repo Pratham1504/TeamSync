@@ -13,10 +13,10 @@ const {
 // router.use(requireAuth)
 
 //Get all projects
-router.get('/',getProject)
+router.get('/',getProjects)
  
 //GET a single project 
-router.get('/:id',getProjects)
+router.get('/:id',getProject)
 
 //POST a new project
 router.post('/', createProject)

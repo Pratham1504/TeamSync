@@ -1,0 +1,9 @@
+# GET http://localhost:4000/tasks/
+
+POST http://localhost:4000/tasks/new/
+Content-Type: application/json
+{
+    "title": "test",
+    "priority":"lowest",
+    "category":"toDo"
+}

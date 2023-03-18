@@ -6,7 +6,7 @@ const {
     createtask,
     deletetask,
     updatetask
-} = require('../controllers.js/taskController')
+} = require('../controllers/taskController')
 const requireAuth = require('../middleware/requireAuth')
 
 // require auth for all task routes

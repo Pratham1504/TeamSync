@@ -44,7 +44,6 @@ const organisation = new schema({
 
     membersInvited:[
         {
-            required:true,
             type:mongoose.Schema.Types.ObjectId, ref: `userInvite`,
         }
     ]

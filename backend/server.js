@@ -11,6 +11,8 @@ const organisationRoutes=require('./routes/organisation')
 
 const taskRoutes = require('./routes/task')
 const boardRoutes = require('./routes/board')
+const commentRoutes = require('./routes/comment')
+const userInviteRoutes = require('./routes/userInvite')
 
 //express app
 const app = express();
@@ -29,6 +31,8 @@ app.use('/user/',userRoutes)
 app.use('/organisation/',organisationRoutes)
 app.use('/tasks/',taskRoutes)
 app.use('/boards/',boardRoutes)
+app.use('/comments/',commentRoutes)
+app.use('/userInvites/',userInviteRoutes)
 
 
 //connect to db

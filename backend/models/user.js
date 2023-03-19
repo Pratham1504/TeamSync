@@ -62,7 +62,11 @@ const user = new schema({
             required:true,
             type:mongoose.Schema.Types.ObjectId, ref: `userInvite`,
         }
-    ]
+    ],
+    openOrg:
+        {
+            type:mongoose.Schema.Types.ObjectId, ref: `organisation`,
+        }
 
 })
 

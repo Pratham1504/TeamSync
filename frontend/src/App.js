@@ -4,11 +4,12 @@ import {BrowserRouter , Routes , Route ,Navigate } from 'react-router-dom';
 import useAuthContext  from './hooks/useAuthContext';
 
 // pages
-import Home from './Pages/LandingPage/Landing'
+import Home from './Pages/HomePage/Home'
 import Login from './Pages/Login/Login';
 import SignUp from './Pages/Signup/Signup';
 import Task from './Pages/Task/task';
 import ERROR from './Pages/ERROR/ERROR';
+import Landing from './Pages/LandingPage/Landing'
 
 function App() {
     const {user} = useAuthContext()
@@ -65,6 +66,10 @@ function App() {
                 <Route
                     exact path='/error'
                     element={<ERROR/>}
+                />
+                <Route
+                    path='/home'
+                    element={user!=null  ? <Home/>: <Navigate to = '/'/>}
                 />
             </Routes>
         </BrowserRouter>

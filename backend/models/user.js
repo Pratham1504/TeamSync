@@ -68,6 +68,7 @@ const user = new schema({
 
 // static signup method
 user.statics.signup = async function (prop){
+    // console.log(prop)
 
     //validation
     if(!prop.email || !prop.password){

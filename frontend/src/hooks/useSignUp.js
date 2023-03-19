@@ -9,15 +9,19 @@ const useSignUp = () =>{
     const signup = async (email,password,image,name) => {
         setIsLoading(true)  
         setError(null)
-        console.log("here")
+        console.log("here2")
         const response = await fetch('/user/signup',{
             method:'POST',
-            headers:{'Content-Type':'application/json'},
-            body:JSON.stringify({name,email,password,image})
+                headers:{'Content-Type':'application/json'},
+                body:JSON.stringify({email,password,image,name})
         })
+        console.log(response)
+
         const json = await response.json()
         console.log(response)
-        // json.token = response.headers.token
+        console.log("ethe")
+        const token = response.headers.token
+        console.log(token)
 
         if(!response.ok){
             setIsLoading(false)

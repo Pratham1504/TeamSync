@@ -1,5 +1,4 @@
 require('dotenv').config();
-const cors=require('cors');
 const mongoose = require('mongoose');
 const express = require('express');
 
@@ -15,11 +14,10 @@ const boardRoutes = require('./routes/board')
 //express app
 const app = express();
 
-app.use(cors());
 //middleware
-// app.use(express.json())
+app.use(express.json())
 app.use((req,res,next)=>{
-        // console.log(req.path,req.method)
+        console.log(req.path,req.method)
         next()
 })
 

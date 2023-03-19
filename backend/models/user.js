@@ -66,10 +66,9 @@ const user = new schema({
 
 })
 
-<<<<<<< HEAD
-=======
 // static signup method
 user.statics.signup = async function (prop){
+    // console.log(prop)
 
     //validation
     if(!prop.email || !prop.password){
@@ -95,7 +94,7 @@ user.statics.signup = async function (prop){
 
 //static login method
 user.statics.login = async function (prop) {
-    validation
+    // validation
     if(!prop.email || !prop.password){
         throw Error('All feilds must be filled')
     }
@@ -113,5 +112,4 @@ user.statics.login = async function (prop) {
     return user
 }
 
->>>>>>> 18a959cc04662fc08ceb9afaecbae6abe2b87c5c
 module.exports = mongoose.model('user', user);

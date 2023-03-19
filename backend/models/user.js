@@ -94,7 +94,7 @@ user.statics.signup = async function (prop){
 
 //static login method
 user.statics.login = async function (prop) {
-    validation
+    // validation
     if(!prop.email || !prop.password){
         throw Error('All feilds must be filled')
     }

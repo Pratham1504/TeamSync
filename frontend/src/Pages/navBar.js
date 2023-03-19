@@ -1,6 +1,13 @@
 import {CgProfile} from 'react-icons/cg';
+import useLogout from '../hooks/useLogout'
 
 const NavBar=()=>{
+    const {logout} = useLogout()
+    const user = JSON.parse(localStorage.getItem('user'))
+
+    const clickHandler = () =>{
+        logout()
+    }
     return(
         <>
         <div className='navbar' style={{display:"flex",justifyContent:"space-between",alignItems:"center",height:"5vh",}}>
@@ -20,8 +27,8 @@ const NavBar=()=>{
                 
                 <div style={{display:"flex",alignItems:"center",fontFamily:"Verdana"}}>
                     <CgProfile style={{fontSize:"150%",margin:"4px"}}/>
-                    <p style={{fontSize:"80%"}}> Pratham Goyal</p>
-
+                    <p style={{fontSize:"80%"}}>{user.name}</p>
+                    <button class="btn btn-dark" onClick={clickHandler}>Log out</button>
                 </div>
                 
                 

@@ -1,5 +1,4 @@
 import  useAuthContext  from "./useAuthContext"
-import React from "react"
 
 const useLogout = () =>{
     const {dispatch} = useAuthContext()

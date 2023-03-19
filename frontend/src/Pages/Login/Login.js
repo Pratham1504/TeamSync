@@ -13,7 +13,7 @@ const Login = ()=>{
     }
 
     return(
-        <form className="login" onSubmit={handleSubmit} action={'<?php echo htmlspecialchars($[PHP_SERVER["PHP_self"]);?>'} method={'post'}>
+        <form className="login" onSubmit={handleSubmit}  method={'post'}>
             <h3>Log in</h3>
 
             <label>Email:</label>

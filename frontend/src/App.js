@@ -7,25 +7,64 @@ import useAuthContext  from './hooks/useAuthContext';
 import Home from './Pages/LandingPage/Landing'
 import Login from './Pages/Login/Login';
 import SignUp from './Pages/Signup/Signup';
+import Task from './Pages/Task/task';
+import ERROR from './Pages/ERROR/ERROR';
 
 function App() {
     const {user} = useAuthContext()
-
+    console.log("Check here")
+    console.log(user)
+    console.log(user!=null)
+    // console.log(user.id)
+    if(!user){
+        return (
+            <>
+                <BrowserRouter>
+                    <Routes>
+                        <Route
+                            exact path='/login'
+                            element={ <Login/>}
+                        />
+                        <Route
+                            exact path='/signUp'
+                            element={<SignUp/>}
+                        />
+                        <Route
+                            exact path='/*'
+                            element={<Navigate to ='/login'/>}
+                        />
+                    </Routes>
+                </BrowserRouter>
+            </>
+        )
+    }
     return (
     <>
         <BrowserRouter>
             <Routes>
                 <Route
-                    path='/'
-                    element={user!=null ? <Home/> : <Navigate to = '/login'/>}
+                    exact path="/"
+                    element={ <Home/>}
                 />
                 <Route
-                    path='/login'
-                    element={user==null  ? <Login/> : <Navigate to = '/'/>}
+                    exact path='/login'
+                    element={ <Navigate to = '/'/> }
                 />
                 <Route
-                    path='/signUp'
-                    element={user==null  ? <SignUp/>: <Navigate to = '/'/>}
+                    exact path='/signUp'
+                    element={<Navigate to = '/'/>}
+                />
+                <Route
+                    exact path='/task'
+                    element={<Task/>}
+                />
+                <Route
+                    exact path='/*'
+                    element={<Navigate to = '/error'/>}
+                />
+                <Route
+                    exact path='/error'
+                    element={<ERROR/>}
                 />
             </Routes>
         </BrowserRouter>

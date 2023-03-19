@@ -1,4 +1,5 @@
 import {CgProfile} from 'react-icons/cg';
+import { Link } from 'react-router-dom';
 import useLogout from '../hooks/useLogout'
 
 const NavBar=()=>{
@@ -13,9 +14,9 @@ const NavBar=()=>{
         <div className='navbar' style={{display:"flex",justifyContent:"space-between",alignItems:"center",height:"5vh",}}>
             <div className="links" style={{display:"flex",width:"45%",justifyContent:"space-around",alignItems:"center"}}>
             <img src="https://www.clipartmax.com/png/small/413-4139811_transparent-background-cool-logo.png" alt="Transparent Background Cool Logo @clipartmax.com"style={{height:"5vh"}}/>
-                    <a href="/Home" className="Pname" style={{textDecoration:"none",color:"black",fontSize:"150%",fontWeight:"bold"}}>UrManagR</a>
+                    <a href="/" className="Pname" style={{textDecoration:"none",color:"black",fontSize:"150%",fontWeight:"bold"}}>UrManagR</a>
                     <a href="/Home" style={{textDecoration:"none"}}>Home</a>
-                    <a href="/task" style={{textDecoration:"none"}}>My tasks</a>
+                    <p ><Link to='/task' style={{textDecoration:"none"}}>My tasks</Link></p>
                     <a href="/Projects" style={{textDecoration:"none"}}>Projects</a>
                     <a href="/Users" style={{textDecoration:"none"}}>Users</a>
                     <a href="/Orgs" style={{textDecoration:"none"}}>Orgs</a>

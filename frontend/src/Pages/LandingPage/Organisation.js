@@ -8,7 +8,7 @@ const Organisation = () => {
 
     useEffect(() => {
         const fetchdata = async () => {
-            const org = await fetch('http://localhost:4000/organisation/')
+            const org = await fetch('/organisation/')
             const orgss = await org.json();
             if (!org) console.log("empty");
             if (org.ok) {

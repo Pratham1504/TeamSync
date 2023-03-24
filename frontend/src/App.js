@@ -11,13 +11,16 @@ import Task from './Pages/Task/task';
 import ERROR from './Pages/ERROR/ERROR';
 import Landing from './Pages/LandingPage/Landing'
 import User from './Pages/UserPage/User';
+import Orgs from './Pages/OrgsPage/Orgs';
+import Project from './Pages/ProjectPage/Project';
 
-const  App=async ()=> {
-    const {user} = await useAuthContext()
+
+function  App  () {
+    const {user} =  useAuthContext()
     console.log("Check here")
     console.log(user)
     console.log(user!=null)
-    console.log(user.id)
+    // console.log(user.id)
     if(!user){
         return (
             <>
@@ -59,6 +62,18 @@ const  App=async ()=> {
                 <Route
                     exact path='/task'
                     element={<Task/>}
+                />
+                <Route
+                    exact path='/user'
+                    element={<User/>}
+                />
+                <Route
+                    exact path='/orgs'
+                    element={<Orgs/>}
+                />
+                <Route
+                    exact path='/projects'
+                    element={<Project/>}
                 />
                 <Route
                     exact path='/user'

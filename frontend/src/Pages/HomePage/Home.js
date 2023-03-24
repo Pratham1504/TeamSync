@@ -1,6 +1,6 @@
 import React from "react";
 import NavBar from "../navBar";
-import './Home.css'
+// import './Home.css'
 
 const HomePage=()=>{
     return (
@@ -9,7 +9,7 @@ const HomePage=()=>{
             <div>
                 <NavBar/>
             </div>
-            
+            <h1>Home</h1>
         </div>
         </>
     )

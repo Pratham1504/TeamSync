@@ -18,10 +18,10 @@ const useSignUp = () =>{
         console.log(response)
 
         const json = await response.json()
-        console.log(response)
-        console.log("ethe")
-        const token = response.headers.token
-        console.log(token)
+        // console.log(response)
+        // console.log("ethe")
+        // const token = response.headers.token
+        // console.log(token)
 
         if(!response.ok){
             setIsLoading(false)

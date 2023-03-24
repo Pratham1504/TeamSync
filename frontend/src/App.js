@@ -45,7 +45,7 @@ function App() {
             <Routes>
                 <Route
                     exact path="/"
-                    element={ <Home/>}
+                    element={ <Landing/>}
                 />
                 <Route
                     exact path='/login'
@@ -60,16 +60,16 @@ function App() {
                     element={<Task/>}
                 />
                 <Route
+                    exact path='/home'
+                    element={<Home/>}
+                />
+                <Route
                     exact path='/*'
                     element={<Navigate to = '/error'/>}
                 />
                 <Route
                     exact path='/error'
                     element={<ERROR/>}
-                />
-                <Route
-                    path='/home'
-                    element={user!=null  ? <Home/>: <Navigate to = '/'/>}
                 />
             </Routes>
         </BrowserRouter>

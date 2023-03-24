@@ -6,6 +6,19 @@ const NavBar=()=>{
     const {logout} = useLogout()
     const user = JSON.parse(localStorage.getItem('user'))
 
+    // console.log(12234)
+    // console.log(window.location.search)
+
+    // const params = new Proxy(new URLSearchParams(window.location.search), {
+    //     get: (searchParams, prop) => searchParams.get(prop),
+    //   });
+    //   // Get the value of "some_key" in eg "https://example.com/?some_key=some_value"
+    //   let value = params.some_key; // "some_value"
+      let value = window.location.search.split('=')[1]
+    //   window.location.search = "?org="+val 
+    //   console.log(12234)
+    //   console.log(value)
+
     const clickHandler = () =>{
         logout()
     }
@@ -14,8 +27,8 @@ const NavBar=()=>{
         <div className='navbar' style={{display:"flex",justifyContent:"space-between",alignItems:"center",height:"5vh",}}>
             <div className="links" style={{display:"flex",width:"45%",justifyContent:"space-around",alignItems:"center"}}>
             <img src="https://www.clipartmax.com/png/small/413-4139811_transparent-background-cool-logo.png" alt="Transparent Background Cool Logo @clipartmax.com"style={{height:"5vh"}}/>
-                    <a href="/" className="Pname" style={{textDecoration:"none",color:"black",fontSize:"150%",fontWeight:"bold"}}>UrManagR</a>
-                    <a href="/Home" style={{textDecoration:"none"}}>Home</a>
+                    <a href="/" className="Pname" style={{textDecoration:"none",color:"black",fontSize:"150%",fontWeight:"bold"}}>Project2023</a>
+                    <p ><Link to={`/home?org=${value}`} style={{textDecoration:"none"}}>Home</Link></p>
                     <p ><Link to='/task' style={{textDecoration:"none"}}>My tasks</Link></p>
                     <a href="/Projects" style={{textDecoration:"none"}}>Projects</a>
                     <a href="/Users" style={{textDecoration:"none"}}>Users</a>

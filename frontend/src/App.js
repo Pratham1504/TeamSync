@@ -10,13 +10,14 @@ import SignUp from './Pages/Signup/Signup';
 import Task from './Pages/Task/task';
 import ERROR from './Pages/ERROR/ERROR';
 import Landing from './Pages/LandingPage/Landing'
+import User from './Pages/UserPage/User';
 
-function App() {
-    const {user} = useAuthContext()
+const  App=async ()=> {
+    const {user} = await useAuthContext()
     console.log("Check here")
     console.log(user)
     console.log(user!=null)
-    // console.log(user.id)
+    console.log(user.id)
     if(!user){
         return (
             <>
@@ -59,6 +60,10 @@ function App() {
                     exact path='/task'
                     element={<Task/>}
                 />
+                <Route
+                    exact path='/user'
+                    element={<User/>}
+                    />
                 <Route
                     exact path='/home'
                     element={<Home/>}

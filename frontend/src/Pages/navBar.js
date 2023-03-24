@@ -1,5 +1,6 @@
 import {CgProfile} from 'react-icons/cg';
 import { Link } from 'react-router-dom';
+// import User from './Pages/UserPage/User'
 import useLogout from '../hooks/useLogout'
 
 const NavBar=()=>{
@@ -31,7 +32,7 @@ const NavBar=()=>{
                     <p ><Link to={`/home?org=${value}`} style={{textDecoration:"none"}}>Home</Link></p>
                     <p ><Link to='/task' style={{textDecoration:"none"}}>My tasks</Link></p>
                     <a href="/Projects" style={{textDecoration:"none"}}>Projects</a>
-                    <a href="/Users" style={{textDecoration:"none"}}>Users</a>
+                    <p ><Link to='/user' style={{textDecoration:"none"}}>Users</Link></p>
                     <a href="/Orgs" style={{textDecoration:"none"}}>Orgs</a>
             </div>
             <div className="orgname" style={{display:"flex",width:"20%",justifyContent:"space-around",alignItems:"center"}}>

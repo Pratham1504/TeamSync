@@ -2,6 +2,8 @@ import {CgProfile} from 'react-icons/cg';
 import { Link } from 'react-router-dom';
 // import User from './Pages/UserPage/User'
 import useLogout from '../hooks/useLogout'
+import './navbar.css'
+import {MdArrowDropDown} from 'react-icons/md';
 
 const NavBar=()=>{
     const {logout} = useLogout()
@@ -43,7 +45,14 @@ const NavBar=()=>{
                 <div style={{display:"flex",alignItems:"center"}}>
                     <CgProfile style={{fontSize:"150%",margin:"4px"}}/>
                     <p style={{fontSize:"80%"}}>{user.name}</p>
+                    {/* <button class="btn btn-dark" onClick={clickHandler}>Log out</button> */}
+                    <div class="dropdown">
+                    <button class="dropbtn"><MdArrowDropDown/></button>
+                    <div class="dropdown-content">
                     <button class="btn btn-dark" onClick={clickHandler}>Log out</button>
+                    <p ><Link to='/profile' style={{textDecoration:"none"}}>Profile</Link></p>
+                    </div>
+                    </div>
                 </div>
                 
                 

@@ -43,11 +43,20 @@ const Organisation = () => {
                         <div className="org-details" style={{  }}>
                             <div style={{ display: "flex", alignItems: "center", justifyContent: "flex-start" }}>
                                 <img src={organisation.image} style={{ height: "7vh", width: "5vh" }} alt="" />
-                                <h4><Link to={`/home?org=${organisation.name}`} onClick={()=>{console.log("organisation._id");console.log(organisation._id) ; orgin(organisation._id)}} disabled={isLoading}>{organisation.name}</Link></h4>
+                                <h4><Link to={`/home?org=${organisation.name}`} style={{fontStyle:"none" ,marginLeft:"3%"}} onClick={()=>{console.log("organisation._id");console.log(organisation._id) ; orgin(organisation._id)}} disabled={isLoading}>{organisation.name}</Link></h4>
                             </div>
                             <p><strong>Creator: </strong>{organisation.createdBy}</p>
                             <p>{formatDistanceToNow(new Date(organisation.createdAt), { addSuffix: true })}</p>
-                            <span className="material-symbols-outlined" onClick={() => { }}><FiMoreVertical/></span>
+                            <span className="material-symbols-outlined" onClick={() => { }}>
+                            <div class="dropdown">
+                            <button class="dropbtn"><FiMoreVertical/></button>
+                            <div class="dropdown-content">
+                            <button class="btn btn-dark" onClick={()=>{}}>Edit</button>
+                                <a href="/profile">Delete</a>
+                            </div>
+                            </div>
+                    </span>
+
                         </div>
                     ))}
                     

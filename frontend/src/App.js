@@ -13,6 +13,8 @@ import Landing from './Pages/LandingPage/Landing'
 import User from './Pages/UserPage/User';
 import Orgs from './Pages/OrgsPage/Orgs';
 import Project from './Pages/ProjectPage/Project';
+import ProfilePage from './Pages/profile/profilePage';
+
 
 
 function  App  () {
@@ -90,6 +92,10 @@ function  App  () {
                 <Route
                     exact path='/error'
                     element={<ERROR/>}
+                />
+                <Route
+                    exact path='/profile'
+                    element={<ProfilePage/>}
                 />
             </Routes>
         </BrowserRouter>

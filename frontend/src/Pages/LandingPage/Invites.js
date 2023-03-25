@@ -33,12 +33,17 @@ if(invite.length){
                     <div className="orgss" style={{ display: "flex" ,overflowX:"auto"}}>
                               {console.log(invite.length)}
                                 { invite && invite.map((invites)=>(
-                                    <div className="invite-details" style={{ width: "25%" ,fontFamily:"Verdana"}}>
+                                    <div className="invite-details" style={{fontFamily:"Verdana"}}>
                                     <div style={{ display: "flex", alignItems: "center", justifyContent: "flex-start" }}>
                                         <h4>{invites.org}</h4>
                                     </div>
                                     <p><strong>Invited by </strong>{invites.invitedBy}</p>
                                     <p>{formatDistanceToNow(new Date(invites.createdAt), { addSuffix: true })}</p>
+                                    <div style={{display:"flex", alignItems:"space-between",minWidth:"300px",justifyContent: "center",marginTop:"3%"}}>
+
+                                        <button type="submit" value="Submit" style={{marginRight:"5%",backgroundColor:"blue",color:"white"}}>Accept</button>
+                                        <button type="reset" value="Reset"  style={{marginLeft:"5%"}}>Delete</button>
+                                    </div>
                                 </div>
                                 ))}
                                 </div>

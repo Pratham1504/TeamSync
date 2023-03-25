@@ -12,6 +12,13 @@
     position: relative;
     box-shadow: 2px 2px 5px rgba(0,0,0,0.10);
     cursor: pointer;
+    min-width: 300px;
+  }
+  .orgss::-webkit-scrollbar {
+    display: none;
+  }
+  .org-details:hover{
+    transform: scale(1.05);
   }
   .org-details h4 {
     margin: 0 0 10px 0;
@@ -25,8 +32,8 @@
   }
   .org-details span {
     position: absolute;
-    top: 20px;
-    right: 20px;
+    top: 5px;
+    right: 5px;
     cursor: pointer;
     /* background: #f1f1f1; */
     padding: 6px;

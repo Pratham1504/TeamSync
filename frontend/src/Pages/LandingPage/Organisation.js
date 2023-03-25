@@ -31,12 +31,16 @@ const Organisation = () => {
                     <div style={{ width: "0.7%", backgroundColor: "blue", marginRight: "8px", borderRadius: "20%" }}>.</div>
                     <h3>Organisations</h3>
                 </div>
-                <div style={{ display: "flex", flexWrap:"wrap" }}>   
-                    <div className="org-details" onClick={()=>{}} style={{ width: "28%" ,fontSize:"150%",display:"flex",justifyContent:"center",alignItems:"center", backgroundColor:"#f1f1f1"}}>
-                       <IoIosAddCircleOutline/> <p>Add Organisation</p>
-                    </div>
+
+
+
+                <div className="orgss" style={{ display: "flex" ,overflowX:"auto"}}>
+                    
+                <div className="org-details" onClick={()=>{}} style={{  fontSize:"150%",display:"flex",justifyContent:"center",alignItems:"center", backgroundColor:"#f1f1f1"}}>
+                           <IoIosAddCircleOutline/> <p>Add Organisation</p>
+                        </div>
                     {orgs && orgs.map((organisation) => (
-                        <div className="org-details" style={{ width: "28%" }}>
+                        <div className="org-details" style={{  }}>
                             <div style={{ display: "flex", alignItems: "center", justifyContent: "flex-start" }}>
                                 <img src={organisation.image} style={{ height: "7vh", width: "5vh" }} alt="" />
                                 <h4><Link to={`/home?org=${organisation.name}`} onClick={()=>{console.log("organisation._id");console.log(organisation._id) ; orgin(organisation._id)}} disabled={isLoading}>{organisation.name}</Link></h4>
@@ -46,6 +50,7 @@ const Organisation = () => {
                             <span className="material-symbols-outlined" onClick={() => { }}><FiMoreVertical/></span>
                         </div>
                     ))}
+                    
                 </div>
 
             </div>

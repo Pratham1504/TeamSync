@@ -1,0 +1,48 @@
+body{
+    max-height: 120vh;
+}
+
+.cards {
+  display: flex;
+  padding: 25px 0px;
+  list-style: none;
+  overflow-x: scroll;
+  scroll-snap-type: x mandatory;
+}
+
+.head {
+    position: sticky;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
+  scroll-snap-type: y mandatory;
+  background-color: lightgray;
+  padding: 1%;
+  margin: 1%;
+  flex: 0 0 100%;
+  max-width: 25%;
+  max-height: 80vh;
+  transition: all 0.2s;
+
+}
+
+.taskcard { 
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    flex: 0 0 20%;
+    padding: 2.5%;
+    margin: 1%;
+    transition: all 0.2s;
+    border-radius: 1rem;
+  }
+
+.cards::-webkit-scrollbar {
+    display: none;
+  }
+  .card::-webkit-scrollbar {
+    display: none;
+  }

@@ -1,5 +1,6 @@
 const User = require('../models/user')
 const {createToken} = require('../middleware/createToken')
+const mongoose = require('mongoose');
 
 //login user
 const loginUser = async (req,res) =>{
@@ -34,4 +35,31 @@ const signupUser = async (req,res) =>{
     }
 }
 
-module.exports = {loginUser,signupUser}
+const userupdate=async(req,res)=>{
+    const {id}=req.params;
+    if(!mongoose.Types.ObjectId.isValid(id)){
+        return res.status(404).json({error : 'No such user'})
+    }
+   
+       const user=await User.findOneAndUpdate({_id:id},{...req.body});
+   
+  if(!user){
+    res.status(201).json({error:"NO SUCH USER"});
+  }
+  res.json(user)
+}
+
+const finduser=async(req,res)=>{
+    const {id}=req.params;
+    if(!mongoose.Types.ObjectId.isValid(id)){
+        return res.status(404).json({error : 'No such user'})
+    }
+    const user=await User.findOne({_id:id});
+    console.log(user)
+
+    if(!user){
+        res.status(201).json({error:"NO SUCH USER"});
+      }
+     res.json(user)
+}
+module.exports = {loginUser,signupUser,userupdate,finduser}

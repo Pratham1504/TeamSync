@@ -3,12 +3,16 @@ import formatDistanceToNow from 'date-fns/formatDistanceToNow';
 import {FiMoreVertical} from 'react-icons/fi';
 import {IoIosAddCircleOutline} from 'react-icons/io'
 import { Link } from "react-router-dom";
+import useAuthContext  from '../../hooks/useAuthContext';
+
 
 const Organisation = () => {
-
+    const {user} =  useAuthContext()
+   console.log(user);
     const [orgs, setorgs] = useState();
 
     useEffect(() => {
+   
         const fetchdata = async () => {
             const org = await fetch('/organisation/')
             const orgss = await org.json();
@@ -20,6 +24,15 @@ const Organisation = () => {
         fetchdata();
     }, [])
     
+    const updateuser=async()=>{
+            const userr=await fetch(`/user/${user._id}`,{
+                method:'PATCH',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ openOrg:orgs.id})
+            })
+            const userrr=await userr.json();
+            console.log(userrr.openOrg);
+    }
 
     return (
         <>
@@ -40,7 +53,7 @@ const Organisation = () => {
                         <div className="org-details" style={{  }}>
                             <div style={{ display: "flex", alignItems: "center", justifyContent: "flex-start" }}>
                                 <img src={organisation.image} style={{ height: "7vh", width: "5vh" }} alt="" />
-                                <h4><Link to={`/home`} style={{fontStyle:"none" ,marginLeft:"3%"}}>{organisation.name}</Link></h4>
+                                <h4><Link to={`/home`} style={{fontStyle:"none" ,marginLeft:"3%"}} onClick={updateuser}>{organisation.name}</Link></h4>
                             </div>
                             <p><strong>Creator: </strong>{organisation.createdBy}</p>
                             <p>{formatDistanceToNow(new Date(organisation.createdAt), { addSuffix: true })}</p>

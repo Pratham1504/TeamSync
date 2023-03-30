@@ -26,7 +26,7 @@ const NavBar=()=>{
             </div>
             <div className="orgname" style={{display:"flex",width:"20%",justifyContent:"space-around",alignItems:"center"}}>
                 <div style={{display:"flex",alignItems:"center"}}>
-                    <p >org:</p><p style={{fontSize:"120%"}}>{org.name}</p>
+                    <p >org:</p><p style={{fontSize:"120%"}}> My org</p>
                 </div>
                 
                 <div style={{display:"flex",alignItems:"center"}}>

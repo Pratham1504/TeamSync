@@ -3,11 +3,8 @@ import formatDistanceToNow from 'date-fns/formatDistanceToNow';
 import {FiMoreVertical} from 'react-icons/fi';
 import {IoIosAddCircleOutline} from 'react-icons/io'
 import { Link } from "react-router-dom";
-import useOrgin from "../../hooks/useOrgin";
 
 const Organisation = () => {
-
-    const {orgin,isLoading,error} = useOrgin()
 
     const [orgs, setorgs] = useState();
 
@@ -43,7 +40,7 @@ const Organisation = () => {
                         <div className="org-details" style={{  }}>
                             <div style={{ display: "flex", alignItems: "center", justifyContent: "flex-start" }}>
                                 <img src={organisation.image} style={{ height: "7vh", width: "5vh" }} alt="" />
-                                <h4><Link to={`/home`} style={{fontStyle:"none" ,marginLeft:"3%"}} onClick={()=>{console.log("organisation._id");console.log(organisation._id) ; orgin(organisation._id)}} disabled={isLoading}>{organisation.name}</Link></h4>
+                                <h4><Link to={`/home`} style={{fontStyle:"none" ,marginLeft:"3%"}}>{organisation.name}</Link></h4>
                             </div>
                             <p><strong>Creator: </strong>{organisation.createdBy}</p>
                             <p>{formatDistanceToNow(new Date(organisation.createdAt), { addSuffix: true })}</p>

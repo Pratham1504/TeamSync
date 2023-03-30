@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { AuthContextProvider } from './context/authContext';
-import { OrgAuthContextProvider } from './context/orgAuthContext';
 
 import App from './App';
 

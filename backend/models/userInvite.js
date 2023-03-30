@@ -20,19 +20,15 @@ const userInvite = new schema({
         type: Date,
     },
     
-    org:[
-        {
+    org:{
             required: true,
             type: mongoose.Schema.Types.ObjectId, ref: `organisation`,
-        }
-    ],
+        },
 
-    invitedBy:[
-        {
+    invitedBy:{
             required:true,
             type:mongoose.Schema.Types.ObjectId, ref: `user`,
         }
-    ]
 
 })
 

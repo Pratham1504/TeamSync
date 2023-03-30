@@ -1,5 +1,6 @@
 import {  useEffect, useState } from "react"
 import useAuthContext from '../../hooks/useAuthContext';
+import NavBar from "../navBar";
 // import Member from '../../components/Member';
 // const mongoose=require('mongoose') 
 
@@ -32,6 +33,7 @@ const User=()=>{
     console.log(owner)
     return(
         <>
+        <NavBar/>
           { 
             owner && <div>
                 <div>

@@ -1,99 +1,69 @@
 import React from 'react';
 import {BrowserRouter , Routes , Route ,Navigate } from 'react-router-dom';
 
-import useAuthContext  from './hooks/useAuthContext';
-
 // pages
 import Home from './Pages/HomePage/Home'
 import Login from './Pages/Login/Login';
 import SignUp from './Pages/Signup/Signup';
-import Task from './Pages/Task/task';
+import Board from './Pages/Board/board';
 import ERROR from './Pages/ERROR/ERROR';
 import Landing from './Pages/LandingPage/Landing'
-import User from './Pages/UserPage/User';
-import Orgs from './Pages/OrgsPage/Orgs';
+import OrgDetails from './Pages/OrgDeatils/OrgDetails';
 import Project from './Pages/ProjectPage/Project';
+import ProfilePage from './Pages/profile/profilePage';
+
 
 
 function  App  () {
-    const {user} =  useAuthContext()
+    const user = localStorage.getItem('user');
     console.log("Check here")
-    console.log(user)
-    console.log(user!=null)
-    // console.log(user.id)
-    if(!user){
-        return (
-            <>
-                <BrowserRouter>
-                    <Routes>
-                        <Route
-                            exact path='/login'
-                            element={ <Login/>}
-                        />
-                        <Route
-                            exact path='/signUp'
-                            element={<SignUp/>}
-                        />
-                        <Route
-                            exact path='/*'
-                            element={<Navigate to ='/login'/>}
-                        />
-                    </Routes>
-                </BrowserRouter>
-            </>
-        )
-    }
     return (
     <>
         <BrowserRouter>
             <Routes>
                 <Route
                     exact path="/"
-                    element={ <Landing/>}
+                    element={user ? <Landing/> : <Navigate to='/login'/> }
                 />
                 <Route
                     exact path='/login'
-                    element={ <Navigate to = '/'/> }
+                    element={user ? <Navigate to='/'/> : <Login/>}
                 />
                 <Route
                     exact path='/signUp'
-                    element={<Navigate to = '/'/>}
+                    element={user ? <Navigate to ='/'/> : <SignUp/>}
                 />
                 <Route
                     exact path='/task'
-                    element={<Task/>}
-                />
-                <Route
-                    exact path='/user'
-                    element={<User/>}
-                />
-                <Route
-                    exact path='/orgs'
-                    element={<Orgs/>}
+                    element={user ? <Board/>: <Navigate to='/login'/>}
                 />
                 <Route
                     exact path='/projects'
-                    element={<Project/>}
+                    element={user ? <Project/>:<Navigate to='/login'/>}
                 />
                 <Route
-                    exact path='/user'
-                    element={<User/>}
+                    exact path='/orgdetails'
+                    element={user ? <OrgDetails/>:<Navigate to='/login'/>}
                     />
                 <Route
                     exact path='/home'
-                    element={<Home/>}
+                    element={user ? <Home/>:<Navigate to='/login'/>}
                 />
                 <Route
                     exact path='/*'
-                    element={<Navigate to = '/error'/>}
+                    element={user ? <Navigate to = '/error'/>:<Navigate to='/login'/>}
                 />
                 <Route
                     exact path='/error'
-                    element={<ERROR/>}
+                    element={user ? <ERROR/>:<Navigate to='/login'/>}
+                />
+                <Route
+                    exact path='/profile'
+                    element={user ? <ProfilePage/>:<Navigate to='/login'/>}
                 />
             </Routes>
         </BrowserRouter>
     </>
   );
-}
+            }
 export default App;

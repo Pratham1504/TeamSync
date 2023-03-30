@@ -66,6 +66,7 @@ const user = new schema({
     openOrg:
         {
             type:mongoose.Schema.Types.ObjectId, ref: `organisation`,
+            default:null
         }
 
 })

@@ -1,24 +1,18 @@
 import {CgProfile} from 'react-icons/cg';
 import { Link } from 'react-router-dom';
 import useLogout from '../hooks/useLogout'
-import useOrgout from '../hooks/useOrgout'
 
 import './navbar.css'
 import {MdArrowDropDown} from 'react-icons/md';
 
 const NavBar=()=>{
     const {logout} = useLogout()
-    const {orgout} = useOrgout()
     const user = JSON.parse(localStorage.getItem('user'))
-    const org = JSON.parse(localStorage.getItem('org'))
 
     const clickHandler = () =>{
         logout()
     }
-    const clickHandler2 = () =>{
-        orgout()
-        window.location.reload(true)
-    }
+
     return(
         <>
         <div className='navbar' style={{display:"flex",justifyContent:"space-between",alignItems:"center",height:"5vh",}}>
@@ -29,7 +23,6 @@ const NavBar=()=>{
                     <p ><Link to='/task' style={{textDecoration:"none"}}>My tasks</Link></p>
                     <p ><Link to='/projects' style={{textDecoration:"none"}}>Projects</Link></p>
                     <p ><Link to='/orgdetails' style={{textDecoration:"none"}}>Org Details</Link></p>
-                    <button class="btn btn-dark" onClick={clickHandler2}>exit org</button>
             </div>
             <div className="orgname" style={{display:"flex",width:"20%",justifyContent:"space-around",alignItems:"center"}}>
                 <div style={{display:"flex",alignItems:"center"}}>

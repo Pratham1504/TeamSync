@@ -10,10 +10,8 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
       <AuthContextProvider>
-    <OrgAuthContextProvider>
 
       <App />
-    </OrgAuthContextProvider>
 
       </AuthContextProvider>
   </React.StrictMode>

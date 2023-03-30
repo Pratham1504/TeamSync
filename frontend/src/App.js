@@ -13,16 +13,12 @@ import Landing from './Pages/LandingPage/Landing'
 import OrgDetails from './Pages/OrgDeatils/OrgDetails';
 import Project from './Pages/ProjectPage/Project';
 import ProfilePage from './Pages/profile/profilePage';
-import useOrgAuthContext from './hooks/useOrgAuthContext';
 
 
 
 function  App  () {
     const {user} =  useAuthContext()
-    const {org} = useOrgAuthContext()
     console.log("Check here")
-    console.log(org)
-    console.log(org!=null)
     // console.log(user.id)
     if(!user){
         return (
@@ -52,7 +48,7 @@ function  App  () {
             <Routes>
                 <Route
                     exact path="/"
-                    element={!org ? <Landing/>:<Navigate to = '/home'/> }
+                    element={<Landing/>}
                 />
                 <Route
                     exact path='/login'

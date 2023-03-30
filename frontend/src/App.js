@@ -1,8 +1,6 @@
 import React from 'react';
 import {BrowserRouter , Routes , Route ,Navigate } from 'react-router-dom';
 
-import useAuthContext  from './hooks/useAuthContext';
-
 // pages
 import Home from './Pages/HomePage/Home'
 import Login from './Pages/Login/Login';
@@ -17,78 +15,55 @@ import ProfilePage from './Pages/profile/profilePage';
 
 
 function  App  () {
-    const {user} =  useAuthContext()
+    const user = localStorage.getItem('user');
     console.log("Check here")
-    // console.log(user.id)
-    if(!user){
-        return (
-            <>
-                <BrowserRouter>
-                    <Routes>
-                        <Route
-                            exact path='/login'
-                            element={ <Login/>}
-                        />
-                        <Route
-                            exact path='/signUp'
-                            element={<SignUp/>}
-                        />
-                        <Route
-                            exact path='/*'
-                            element={<Navigate to ='/login'/>}
-                        />
-                    </Routes>
-                </BrowserRouter>
-            </>
-        )
-    }
     return (
     <>
         <BrowserRouter>
             <Routes>
                 <Route
                     exact path="/"
-                    element={<Landing/>}
+                    element={user ? <Landing/> : <Navigate to='/login'/> }
                 />
                 <Route
                     exact path='/login'
-                    element={ <Navigate to = '/'/> }
+                    element={user ? <Navigate to='/'/> : <Login/>}
                 />
                 <Route
                     exact path='/signUp'
-                    element={<Navigate to = '/'/>}
+                    element={user ? <Navigate to ='/'/> : <SignUp/>}
                 />
                 <Route
                     exact path='/task'
-                    element={<Board/>}
+                    element={user ? <Board/>: <Navigate to='/login'/>}
                 />
                 <Route
                     exact path='/projects'
-                    element={<Project/>}
+                    element={user ? <Project/>:<Navigate to='/login'/>}
                 />
                 <Route
                     exact path='/orgdetails'
-                    element={<OrgDetails/>}
+                    element={user ? <OrgDetails/>:<Navigate to='/login'/>}
                     />
                 <Route
                     exact path='/home'
-                    element={<Home/>}
+                    element={user ? <Home/>:<Navigate to='/login'/>}
                 />
                 <Route
                     exact path='/*'
-                    element={<Navigate to = '/error'/>}
+                    element={user ? <Navigate to = '/error'/>:<Navigate to='/login'/>}
                 />
                 <Route
                     exact path='/error'
-                    element={<ERROR/>}
+                    element={user ? <ERROR/>:<Navigate to='/login'/>}
                 />
                 <Route
                     exact path='/profile'
-                    element={<ProfilePage/>}
+                    element={user ? <ProfilePage/>:<Navigate to='/login'/>}
                 />
             </Routes>
         </BrowserRouter>
     </>
   );
-}
+            }
 export default App;

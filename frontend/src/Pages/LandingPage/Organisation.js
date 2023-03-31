@@ -2,14 +2,15 @@ import React, { useEffect, useState } from "react";
 import formatDistanceToNow from 'date-fns/formatDistanceToNow';
 import {FiMoreVertical} from 'react-icons/fi';
 import {IoIosAddCircleOutline} from 'react-icons/io'
-import { Link } from "react-router-dom";
+import { json, Link } from "react-router-dom";
 import useAuthContext  from '../../hooks/useAuthContext';
 
 
 const Organisation = () => {
     const {user} =  useAuthContext()
-   console.log(user);
+   const [a,aa]=useState({})
     const [orgs, setorgs] = useState();
+
 
     useEffect(() => {
    
@@ -23,15 +24,23 @@ const Organisation = () => {
         }
         fetchdata();
     }, [])
-    
-    const updateuser=async()=>{
-            const userr=await fetch(`/user/${user._id}`,{
+ 
+  
+
+    async function updateuser(){
+
+        const a= JSON.parse(localStorage.user)
+      a.openOrg=orgs[1]._id
+      localStorage.user=JSON.stringify(a);
+      console.log(a)
+        document.location.reload()
+        
+            const userr= await fetch(`/user/${user._id}`,{
                 method:'PATCH',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ openOrg:orgs.id})
+                body: JSON.stringify({ "openOrg":orgs[1]._id})
             })
-            const userrr=await userr.json();
-            console.log(userrr.openOrg);
+           
     }
 
     return (
@@ -76,7 +85,7 @@ const Organisation = () => {
                         <div className="org-details" style={{  }}>
                             <div style={{ display: "flex", alignItems: "center", justifyContent: "flex-start" }}>
                                 <img src={organisation.image} style={{ height: "7vh", width: "5vh" }} alt="" />
-                                <h4><Link to={`/home`} style={{fontStyle:"none" ,marginLeft:"3%"}} onClick={updateuser}>{organisation.name}</Link></h4>
+                                <h4 onClick={updateuser}><Link to={`/home`} style={{fontStyle:"none" ,marginLeft:"3%"}} >{organisation.name}</Link></h4>
                             </div>
                             <p><strong>Creator: </strong>{organisation.createdBy}</p>
                             <p>{formatDistanceToNow(new Date(organisation.createdAt), { addSuffix: true })}</p>

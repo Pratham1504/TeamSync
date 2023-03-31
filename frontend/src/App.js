@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {BrowserRouter , Routes , Route ,Navigate } from 'react-router-dom';
 
 // pages
@@ -11,19 +11,26 @@ import Landing from './Pages/LandingPage/Landing'
 import OrgDetails from './Pages/OrgDeatils/OrgDetails';
 import Project from './Pages/ProjectPage/Project';
 import ProfilePage from './Pages/profile/profilePage';
+import useAuthContext from './hooks/useAuthContext';
+import { AuthContext } from './context/authContext';
 
 
 
-function  App  () {
-    const user = localStorage.getItem('user');
-    console.log("Check here")
+const App= ()=> {
+
+const userr=localStorage.getItem('user')
+const user=JSON.parse(userr)
+console.log("aditya")
+// console.log(userr.user)
+// window.location.reload()
+console.log("aditya")
     return (
-    <>
+    <>{ 
         <BrowserRouter>
             <Routes>
                 <Route
                     exact path="/"
-                    element={user ? <Landing/> : <Navigate to='/login'/> }
+                    element={user?(user.openOrg?(<Navigate to ="/home"/>):(<Landing/>)):(<Navigate  to={'/login'}/>) }
                 />
                 <Route
                     exact path='/login'
@@ -47,7 +54,7 @@ function  App  () {
                     />
                 <Route
                     exact path='/home'
-                    element={user ? <Home/>:<Navigate to='/login'/>}
+                    element={user ?user.openOrg?<Home/>:<Navigate to="/"/>:<Navigate to='/login'/>}
                 />
                 <Route
                     exact path='/*'
@@ -63,6 +70,7 @@ function  App  () {
                 />
             </Routes>
         </BrowserRouter>
+}
     </>
   );
             }

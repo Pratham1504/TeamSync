@@ -7,7 +7,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 // import {MdArrowDropDown} from 'react-icons/md';
 
 const NavBar=()=>{
-    const {authuser} =  useAuthContext()
+    
     const {logout} = useLogout()
     const user = JSON.parse(localStorage.getItem('user'))
 
@@ -15,12 +15,23 @@ const NavBar=()=>{
         logout()
     }
 
+
     const orgout=async()=>{
-        const userr=await fetch(`/user/${authuser.id}`,{
+      
+        const a= JSON.parse(localStorage.user)
+      a.openOrg=null
+      localStorage.user=JSON.stringify(a);
+      console.log(a)
+       
+      document.location.reload()
+
+        const userr=await fetch(`/user/${user._id}`,{
             method:'PATCH',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ openOrg:null})
+            body: JSON.stringify({ "openOrg":null})
         })
+        
+      
     }
 
     return(
@@ -29,7 +40,7 @@ const NavBar=()=>{
             <nav class="navbar navbar-expand-lg bg-body-tertiary">
                 <div class="container-fluid">
                     <img src="https://www.clipartmax.com/png/small/413-4139811_transparent-background-cool-logo.png" alt="Transparent Background Cool Logo @clipartmax.com" style={{ height: "5vh" , marginLeft:"0" ,paddingLeft:'0', }} />
-                    <a href="/" className="Pname nav-link active" style={{ textDecoration: "none", color: "black", fontSize: "150%", fontWeight: "bold" ,marginRight:"2%",marginLeft:"1%"}}>Project2023</a>
+                    <Link to="/" className="Pname nav-link active" style={{ textDecoration: "none", color: "black", fontSize: "150%", fontWeight: "bold" ,marginRight:"2%",marginLeft:"1%"}} onClick={orgout}>Project2023</Link>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
@@ -66,7 +77,7 @@ const NavBar=()=>{
             {/* <div className='navbar' style={{display:"flex",justifyContent:"space-between",alignItems:"center",height:"5vh",}}>
             <div className="links" style={{display:"flex",width:"45%",justifyContent:"space-around",alignItems:"center"}}>
             <img src="https://www.clipartmax.com/png/small/413-4139811_transparent-background-cool-logo.png" alt="Transparent Background Cool Logo @clipartmax.com"style={{height:"5vh"}}/>
-                    <a href="/" className="Pname" style={{textDecoration:"none",color:"black",fontSize:"150%",fontWeight:"bold"}} onClick={orgout}>Project2023</a>
+                    <Link to="/" className="Pname" style={{textDecoration:"none",color:"black",fontSize:"150%",fontWeight:"bold"}} onClick={orgout}>Project2023</Link>
                     <p ><Link to={`/home`} style={{textDecoration:"none"}}>Home</Link></p>
                     <p ><Link to='/task' style={{textDecoration:"none"}}>My tasks</Link></p>
                     <p ><Link to='/projects' style={{textDecoration:"none"}}>Projects</Link></p>

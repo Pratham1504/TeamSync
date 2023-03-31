@@ -39,16 +39,39 @@ const Organisation = () => {
             <div>
                 <div style={{ display: "flex", height: "10vh", alignItems: "center", backgroundColor:"#f1f1f1",boxShadow: "2px 2px 5px rgba(0,0,0,0.10)",}}>
                     <div style={{ width: "0.7%", backgroundColor: "blue", marginRight: "8px", borderRadius: "20%" }}>.</div>
-                    <h3>Organisations</h3>
+                    <h4 style={{fontWeight:"bolder"}}>Organisations</h4>
                 </div>
 
 
 
                 <div className="orgss" style={{ display: "flex" ,overflowX:"auto"}}>
                     
-                <div className="org-details" onClick={()=>{}} style={{  fontSize:"150%",display:"flex",justifyContent:"center",alignItems:"center", backgroundColor:"#f1f1f1"}}>
+                <div className="org-details" data-bs-toggle="modal" data-bs-target="#Create-Board" onClick={()=>{}} style={{  fontSize:"150%",display:"flex",justifyContent:"center",alignItems:"center", backgroundColor:"#f1f1f1"}}>
                            <IoIosAddCircleOutline/> <p>Add Organisation</p>
                         </div>
+
+                        <div class="modal fade" id="Create-Board" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Add New Organisation</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <form>
+                                        <label for="name">Name of Organisation:</label>
+                                        <input type="text" id="name" name="name" required />
+
+                                        <label for="image">Image of Organization:</label>
+                                        <input type="file" id="image" name="image" accept="image/*" required />
+
+                                        <input type="submit" value="Submit" />
+                                    </form>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     {orgs && orgs.map((organisation) => (
                         <div className="org-details" style={{  }}>
                             <div style={{ display: "flex", alignItems: "center", justifyContent: "flex-start" }}>

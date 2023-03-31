@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom';
 import useLogout from '../hooks/useLogout'
 import useAuthContext  from '../hooks/useAuthContext';
 import './navbar.css'
-import {MdArrowDropDown} from 'react-icons/md';
+import 'bootstrap/dist/css/bootstrap.css';
+// import {MdArrowDropDown} from 'react-icons/md';
 
 const NavBar=()=>{
     const {authuser} =  useAuthContext()
@@ -35,7 +36,7 @@ const NavBar=()=>{
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav me-auto mb-0 mb-lg-0">
                             <li class="nav-item" style={{ display: "flex", alignItems: "center" }}>
-                                <Link to={`/home?org=${value}`} className='nav-link' style={{ textDecoration: "none" }}>Home</Link>
+                                <Link to={`/home?org=`} className='nav-link' style={{ textDecoration: "none" }}>Home</Link>
                             </li>
                             <li class="nav-item" style={{ display: "flex", alignItems: "center" }}>
                                 <Link to='/task'className='nav-link' style={{ textDecoration: "none" }}>My tasks</Link>

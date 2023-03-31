@@ -3,11 +3,11 @@ import formatDistanceToNow from 'date-fns/formatDistanceToNow';
 import { FiMoreVertical } from 'react-icons/fi';
 import { IoIosAddCircleOutline } from 'react-icons/io'
 import { Link } from "react-router-dom";
-import useOrgin from "../../hooks/useOrgin";
+// import useOrgin from "../../hooks/useOrgin";
 
 const Boards = () => {
 
-    const { orgin, isLoading, error } = useOrgin()
+    // const { orgin, isLoading, error } = useOrgin()
 
     const [boards, setBoards] = useState();
 
@@ -39,25 +39,23 @@ const Boards = () => {
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                    <h5 class="modal-title" id="exampleModalLabel">Add New Board</h5>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
-                                    <div class="mb-3 row">
-                                        <label for="staticEmail" class="col-sm-2 col-form-label">Email</label>
-                                        <div class="col-sm-10">
-                                            <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="email@example.com"/>
-                                        </div>
-                                    </div>
-                                    <div class="mb-3 row">
-                                        <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
-                                        <div class="col-sm-10">
-                                            <input type="password" class="form-control" id="inputPassword"/>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-primary">Add Board</button>
+                                    <form>
+                                        <label for="name">Name of Board:</label>
+                                        <input type="text" id="name" name="name" required />
+
+                                        <label for="Description">Description of Board:</label>
+                                        <input type="text" id="description" name="name"/>
+
+                                        <label for="image">Image of Organization:</label>
+                                        <input type="file" id="image" name="image" accept="image/*" required />
+
+                                        <input type="submit" value="Submit" />
+                                    </form>
+
                                 </div>
                             </div>
                         </div>
@@ -66,7 +64,7 @@ const Boards = () => {
                         <div className="board-details" style={{ width: "28%" }}>
                             <div style={{ display: "flex", alignItems: "center", justifyContent: "flex-start" }}>
                                 <img src={board.image} style={{ height: "7vh", width: "5vh" }} alt="" />
-                                <h4><Link to={`/home?org=${board.name}`} onClick={() => { console.log("board._id"); console.log(board._id); orgin(board._id) }} disabled={isLoading}>{board.name}</Link></h4>
+                                <h4><Link to={`/home?org=${board.name}`}></Link></h4>
                             </div>
                             <p><strong>Creator: </strong>{board.description}</p>
                             <p>{formatDistanceToNow(new Date(board.createdAt), { addSuffix: true })}</p>

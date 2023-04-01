@@ -21,7 +21,7 @@ const App= ()=> {
 const userr=localStorage.getItem('user')
 const user=JSON.parse(userr)
 console.log("aditya")
-// console.log(userr.user)
+console.log(user)
 // window.location.reload()
 console.log("aditya")
     return (
@@ -42,15 +42,15 @@ console.log("aditya")
                 />
                 <Route
                     exact path='/task'
-                    element={user ? <Board/>: <Navigate to='/login'/>}
+                    element={user ? user.openOrg?<Board/>:<Navigate to="/"/>: <Navigate to='/login'/>}
                 />
                 <Route
                     exact path='/projects'
-                    element={user ? <Project/>:<Navigate to='/login'/>}
+                    element={user ? user.openOrg?<Project/>:<Navigate to="/"/>:<Navigate to='/login'/>}
                 />
                 <Route
                     exact path='/orgdetails'
-                    element={user ? <OrgDetails/>:<Navigate to='/login'/>}
+                    element={user ? user.openOrg?<OrgDetails/>:<Navigate to="/"/>:<Navigate to='/login'/>}
                     />
                 <Route
                     exact path='/home'

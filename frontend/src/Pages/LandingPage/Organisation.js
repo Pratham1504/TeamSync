@@ -33,7 +33,7 @@ const Organisation = () => {
       a.openOrg=orgs[1]._id
       localStorage.user=JSON.stringify(a);
       console.log(a)
-        document.location.reload()
+    window.location.reload()
         
             const userr= await fetch(`/user/${user._id}`,{
                 method:'PATCH',

@@ -27,18 +27,19 @@ const Organisation = () => {
  
   
 
-    async function updateuser(){
+    async function updateuser(organisation){
+
 
         const a= JSON.parse(localStorage.user)
-      a.openOrg=orgs[1]._id
-      localStorage.user=JSON.stringify(a);
-      console.log(a)
-    window.location.reload()
+        a.openOrg=organisation._id
+        localStorage.user=JSON.stringify(a);
+        console.log(a)
+        window.location.reload()
         
             const userr= await fetch(`/user/${user._id}`,{
                 method:'PATCH',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ "openOrg":orgs[1]._id})
+                body: JSON.stringify({ "openOrg":organisation._id})
             })
            
     }
@@ -85,7 +86,7 @@ const Organisation = () => {
                         <div className="org-details" style={{  }}>
                             <div style={{ display: "flex", alignItems: "center", justifyContent: "flex-start" }}>
                                 <img src={organisation.image} style={{ height: "7vh", width: "5vh" }} alt="" />
-                                <h4 onClick={updateuser}><Link to={`/home`} style={{fontStyle:"none" ,marginLeft:"3%"}} >{organisation.name}</Link></h4>
+                                <h4 onClick={updateuser.bind(this,organisation)}><Link to={`/home`} style={{fontStyle:"none" ,marginLeft:"3%"}} >{organisation.name}</Link></h4>
                             </div>
                             <p><strong>Creator: </strong>{organisation.createdBy}</p>
                             <p>{formatDistanceToNow(new Date(organisation.createdAt), { addSuffix: true })}</p>

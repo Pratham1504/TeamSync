@@ -1,9 +1,10 @@
+// const { default: Boards } = require('../../frontend/src/Pages/ProjectPage/Boards')
+const Boards = require('../models/board')
 const Task = require('../models/task')
 const mongoose = require('mongoose')
 
 // Get all tasks 
 const getTasks = async (req,res) =>{
-
     const task = await Task.find()
     res.status(200).json(task)
 }
@@ -15,7 +16,15 @@ const getTask = async (req,res) =>{
     {
         return res.status(404).json({error : 'No such Task'})
     }
-    const task = await Task.findById(id)
+    const board =await Boards.findOne({_id:id})
+    // const task = await Task.findById(id)
+    let p = board.tasks
+    let task = []
+    for(let i=0;i<p.length;i++) {
+        const f = await Task.findOne({_id:p[i]})
+        task.push(f)
+        // console.log(f)
+    }
     if(!task){
         return res.status(404).json({error : 'No Such Task'})
     }
@@ -30,6 +39,10 @@ const createTask = async (req,res) => {
     // add doc to db
     try{
         const task = await Task.create(req.body)
+        const id = task.boardId
+        const board = await Boards.findById(id)
+        board.tasks.push(task._id)
+        board.save()
         res.status(200).json(task)
     }catch(err){
         res.status(400).json({error:err.message})

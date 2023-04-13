@@ -50,7 +50,7 @@ const NavBar=()=>{
                                 <Link to={`/home?org=`} className='nav-link' style={{ textDecoration: "none" }}>Home</Link>
                             </li>
                             <li class="nav-item" style={{ display: "flex", alignItems: "center" }}>
-                                <Link to='/task'className='nav-link' style={{ textDecoration: "none" }}>My tasks</Link>
+                                <Link to='/board'className='nav-link' style={{ textDecoration: "none" }}>My tasks</Link>
                             </li>
                             <li class="nav-item" style={{ display: "flex", alignItems: "center" }}>
                                 <Link to='/projects' className='nav-link' style={{ textDecoration: "none" }}>Projects</Link>

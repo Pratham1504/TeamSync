@@ -73,6 +73,7 @@ const Boards = () => {
                     </div>
                     {boards && boards.map((board) => (
                         <div className="board-details" style={{ width: "28%" }}>
+                        <Link to={`/board/?id=${board._id}`} style={{textDecoration:"none"}}>
                             <div style={{ display: "flex", alignItems: "center", justifyContent: "flex-start" }}>
                                 <h4><Link to={`/home?org=${board.name}`}></Link></h4>
                             </div>
@@ -81,6 +82,8 @@ const Boards = () => {
                             <p><strong>Description: </strong>{board.description}</p>
                             <p>{formatDistanceToNow(new Date(board.createdAt), { addSuffix: true })}</p>
                             <span className="material-symbols-outlined" onClick={() => { }}><FiMoreVertical /></span>
+                            </Link>
+                        
                         </div>
                     ))}
                 </div>

@@ -20,10 +20,6 @@ const App= ()=> {
 
 const userr=localStorage.getItem('user')
 const user=JSON.parse(userr)
-console.log("aditya")
-console.log(user)
-// window.location.reload()
-console.log("aditya")
     return (
     <>{ 
         <BrowserRouter>
@@ -41,7 +37,7 @@ console.log("aditya")
                     element={user ? <Navigate to ='/'/> : <SignUp/>}
                 />
                 <Route
-                    exact path='/task'
+                    exact path='/board'
                     element={user ? user.openOrg?<Board/>:<Navigate to="/"/>: <Navigate to='/login'/>}
                 />
                 <Route

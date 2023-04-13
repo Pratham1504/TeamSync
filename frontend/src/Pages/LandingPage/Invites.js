@@ -17,9 +17,9 @@ useEffect(()=>{
             }
             console.log(invite)
 }
-console.log("ethes")
+
 fetchdata();
-console.log(invite)
+
 
 },[])
 if(invite.length){

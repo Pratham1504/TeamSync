@@ -1,36 +1,53 @@
-import { useState } from "react" 
-import  useLogin  from "../../hooks/useLogin"
+import { useState } from "react"
+import useLogin from "../../hooks/useLogin"
+import { Link } from 'react-router-dom';
+import './Login.css';
+const Login = () => {
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    const { login, isLoading, error } = useLogin()
 
-const Login = ()=>{
-    const [email,setEmail] = useState('')
-    const [password,setPassword] = useState('')
-    const {login,isLoading,error} = useLogin()
-
-    const handleSubmit = async (e) =>{
+    const handleSubmit = async (e) => {
         e.preventDefault()
-        await login(email,password)
+        await login(email, password)
         window.location.reload();
     }
 
-    return(
-        <form className="login" onSubmit={handleSubmit}  method={'post'}>
-            <h3>Log in</h3>
+    return (
+        <div className="wrappp">
+            <div class="loginContainer">
+                <div className="login-section">
+                    <form className="login" onSubmit={handleSubmit} method={'post'}>
+                        <h2>Log in</h2>
 
-            <label>Email:</label>
-            <input 
-                type="email" 
-                onChange={(e)=>setEmail(e.target.value)}    
-                value= {email}
-            />
-            <label>Password:</label>
-            <input 
-                type="password" 
-                onChange={(e)=>setPassword(e.target.value)}
-                value= {password}
-            />  
-            <button disabled={isLoading}>Log in</button>
-            {error && <div className="error">{error}</div>}
-        </form>
+                        <label>Email:</label>
+                        <input
+                            type="email"
+                            onChange={(e) => setEmail(e.target.value)}
+                            value={email}
+                            id="email"
+                        />
+                        <label>Password:</label>
+                        <input
+                            type="password"
+                            onChange={(e) => setPassword(e.target.value)}
+                            value={password}
+                            id="password"
+                        />
+                        <button className="LogInbutton"disabled={isLoading}>Log in</button>
+                        {error && <div className="error">{error}</div>}
+                    </form>
+                    <Link to='/signUp' style={{"textDecoration":"none","color":"blue","marginTop":"10px"}}>Are you new to Project2023?</Link>
+                </div>
+                <div class="screenshots-section">
+                    <h3>Project2023</h3>
+                    <div class="screenshot1"></div>
+                    <div class="screenshot2"></div>
+                    <div class="screenshot3"></div>
+                </div>
+            </div>
+
+        </div>
     )
 }
 

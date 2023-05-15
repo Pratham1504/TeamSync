@@ -67,7 +67,7 @@ const NavBar=()=>{
                         </div>
                         <div style={{ display: "flex", alignItems: "center",marginRight:"2%" }}>
                             <CgProfile style={{ fontSize: "150%", margin: "4px" }} />
-                            <p style={{ fontSize: "80%", marginBottom: "0" }}>{user.name}</p>
+                            <Link to='/profile' style={{ fontSize: "80%", marginBottom: "0" , textDecoration: "none" }}>ff</Link>
                         </div>
                         <button class="btn btn-secondary btn-sm" onClick={clickHandler} style={{marginRight:"2%"}}>Log out</button>
                     </div>

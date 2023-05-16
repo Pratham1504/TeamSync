@@ -17,9 +17,11 @@ import { AuthContext } from './context/authContext';
 
 
 const App= ()=> {
-
+    
 const userr=localStorage.getItem('user')
 const user=JSON.parse(userr)
+console.log('raghav Doda')
+console.log(user)
     return (
     <>{ 
         <BrowserRouter>

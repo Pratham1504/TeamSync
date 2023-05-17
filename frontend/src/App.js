@@ -64,7 +64,7 @@ console.log(user)
                 />
                 <Route
                     exact path='/profile'
-                    element={user ? <ProfilePage/>:<Navigate to='/login'/>}
+                    element={user ?user.openOrg?<ProfilePage/>:<Navigate to="/"/> :<Navigate to='/login'/>}
                 />
             </Routes>
         </BrowserRouter>

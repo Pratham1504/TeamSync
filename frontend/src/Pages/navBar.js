@@ -63,7 +63,7 @@ const NavBar=  ()=>{
                                     <Link to='/projects' className='nav-link' style={{ textDecoration: "none" }}>Projects</Link>
                                 </li>
                                 <li class="nav-item" style={{ display: "flex", alignItems: "center" }}>
-                                    <Link to='/org details' className='nav-link' style={{ textDecoration: "none" }}>org details</Link>
+                                    <Link to='/orgdetails' className='nav-link' style={{ textDecoration: "none" }}>org details</Link>
                                 </li>
                             </ul>
                             {orgOpen.name && 

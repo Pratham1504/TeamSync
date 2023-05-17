@@ -51,7 +51,6 @@ const NavBar=  ()=>{
                         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-icon"></span>
                         </button>
-                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
                             <ul class="navbar-nav me-auto mb-0 mb-lg-0">
                                 <li class="nav-item" style={{ display: "flex", alignItems: "center" }}>
                                     <Link to='/home' className='nav-link' style={{ textDecoration: "none" }}>Home</Link>
@@ -76,7 +75,6 @@ const NavBar=  ()=>{
                                 <Link to='/profile' style={{ fontSize: "80%", marginBottom: "0" , textDecoration: "none" }}>{user.name}</Link>
                             </div>
                             <button class="btn btn-secondary btn-sm" onClick={clickHandler} style={{marginRight:"2%"}}>Log out</button>
-                        </div>
                     </div>
                 </nav>
             </>

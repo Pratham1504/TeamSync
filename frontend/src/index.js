@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { AuthContextProvider } from './context/authContext';
 import { BoardProvider} from './context/boardContext';
-
+import './index.css'
 import App from './App';
 import { TaskProvider } from './context/taskContext';
 

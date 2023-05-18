@@ -1,16 +1,16 @@
 import React from "react";
-import Projects from "./Projects";
+import Boards from "./Boards";
 import Members from "./Members";
-import './Project.css'
+import './BoardsInProject.css'
 import NavBar from "../navBar";
 
-const Landing=()=>{
+const BoardsInProject=()=>{
 return(
     <>
     <NavBar/>
     <div>
         <div style={{marginTop:"5px"}}>
-            <Projects/>
+            <Boards/>
         </div>
         <div >
             <Members/>    
@@ -20,4 +20,4 @@ return(
 )
 }
 
-export default Landing;
+export default BoardsInProject;

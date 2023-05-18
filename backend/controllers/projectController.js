@@ -1,5 +1,6 @@
 const Project = require('../models/project')
 const mongoose = require('mongoose')
+const Orrg = require('../models/organisation')
 
 // Get all projects 
 const getProjects = async (req,res) =>{
@@ -23,18 +24,26 @@ const getProject = async (req,res) =>{
 }
 
 // Create new project
-const createProject = async (req,res) => {
-    if(req.body.length > 0){
-        return res.status(400).json({error: ' Please Fill in all the Fields',emptyFields})
+const createProject = async (req, res) => {
+    try {
+      if (Object.keys(req.body).length === 0) {
+        return res.status(400).json({ error: 'Please fill in all the fields' });
+      }
+  
+      const project = await Project.create(req.body);
+      const id = req.body.orgId;
+      const org = await Orrg.findById(id);
+      if (!org) {
+        return res.status(404).json({ error: 'Organization not found' });
+      }
+      org.projects.push(req.body);
+      await org.save();
+      console.log("done");      
+      res.status(200).json(project);
+    } catch (err) {
+      res.status(400).json({ error: err.message });
     }
-    // add doc to db
-    try{
-        const project = await Project.create(req.body)
-        res.status(200).json(project)
-    }catch(err){
-        res.status(400).json({error:err.message})
-    }
-}
+  };
 
 // delete a project 
 const deleteProject = async (req,res) =>{

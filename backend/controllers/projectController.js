@@ -1,5 +1,6 @@
 const Project = require('../models/project')
 const mongoose = require('mongoose')
+const Orrg = require('../models/organisation')
 
 // Get all projects 
 const getProjects = async (req,res) =>{
@@ -30,6 +31,13 @@ const createProject = async (req,res) => {
     // add doc to db
     try{
         const project = await Project.create(req.body)
+        const id = project.orgId
+        console.log(id)
+        const org = await Orrg.findById(id)
+        console.log(org)
+        org.projects.push(project._id)
+        org.save()
+        console.log(org)
         res.status(200).json(project)
     }catch(err){
         res.status(400).json({error:err.message})
@@ -72,5 +80,5 @@ module.exports = {
     getProjects,
     createProject,
     deleteProject,
-    updateProject
+    updateProject
 }

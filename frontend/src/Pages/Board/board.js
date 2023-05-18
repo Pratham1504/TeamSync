@@ -15,15 +15,18 @@ const Task = () => {
       useEffect(()=>{  
         tasks.map((steptask)=>{
             console.log("cheeku")
-            if(!tassk.has(steptask.category)){console.log("cheeku");tassk[steptask.category]=[steptask];}
+            if(!tassk.has(steptask.category)){
+                console.log("cheeku");
+                tassk[steptask.category]=[steptask];
+            }
             else{
                 const updatedtask=[...uptassk[steptask.category],steptask];
                 uptassk[steptask.category]=updatedtask;
             
             }
             uplenth(Object.keys(tassk).length)    
-    })
-},[tasks]);
+        })
+    },[tasks]);
 
 if(lenth>0){
     return (
@@ -36,15 +39,16 @@ if(lenth>0){
             {Object.keys(tassk).map((key) =>(
             <div className="card">
                             <div style={{justifyContent:"space-between",display:"flex" , marginBottom:"5%"}}>
-                            <h3>Backlog</h3> 
-                            <button >+</button>
+                            <h3>{key}</h3> 
+                            <button>+</button>
                             </div>
             
                                 {tassk[key].map(value1 => (
                                     
                                     <div className="taskcard">
                                     <Link to='/task' style={{textDecoration:"none"}}><h3>{value1.title}</h3></Link> 
-                                    <p style={{wordBreak: "break-all" ,  whiteSpace: "normal"}}>{value1.description}</p>                            <div style={{justifyContent:"flex-end" , display:"flex",fontSize:"120%"}}>
+                                    <p style={{wordBreak: "break-all" ,  whiteSpace: "normal"}}>{value1.description}</p>                            
+                                    <div style={{justifyContent:"flex-end" , display:"flex",fontSize:"120%"}}>
                                     <Link to='/task' style={{margin:"1%"}}><RiMessage3Line  /></Link>
                                     <Link to='/task' style={{margin:"1%"}}><RiAttachment2 /></Link>
                                     </div>

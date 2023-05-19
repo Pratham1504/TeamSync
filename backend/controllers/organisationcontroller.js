@@ -1,6 +1,6 @@
 const Organisation = require('../models/organisation')
 const mongoose = require('mongoose');
-
+const UserSchema = require('../models/user')
 
 
 const organisationGet=async (req,res)=>{
@@ -41,8 +41,14 @@ const organisationPut=async (req,res)=>{
 const organisationPost=async (req,res)=>{
    
     try{
-   const org=await Organisation.create(req.body);
-  res.status(200).json(org);
+   const org = await Organisation.create(req.body);
+   const id = org.createdBy;
+   console.log(id);        
+   const user = await UserSchema.findById(id);
+   user.orgs.push(org._id);
+   user.save();
+   console.log(user)
+   res.status(200).json(org);
     }
     catch(error){
        res.status(201).json({error:error.message});

@@ -47,6 +47,8 @@ const organisationPost = async (req, res) => {
     try {
         const org = await Organisation.create(req.body);
         res.status(200).json(org);
+        // console.log("d");
+        
     }
     catch (error) {
         res.status(201).json({ error: error.message });

@@ -33,8 +33,10 @@ const project = new schema({
     
     boards:[
         {
-            required: true,
-            type: mongoose.Schema.Types.ObjectId, ref: `board`,
+            name:{required: true,type:String},
+            description:{required: true,type:String},
+            _id:{required: true,type: mongoose.Schema.Types.ObjectId, ref:`board`},
+            createdAt:{required:true , type:String}
         }
     ],
 

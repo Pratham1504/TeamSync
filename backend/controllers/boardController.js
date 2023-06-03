@@ -15,7 +15,7 @@ const getBoard = async (req,res) =>{
     {
         return res.status(404).json({error : 'No such Board'})
     }
-    const board = await Board.findOne({projectId:id})
+    const board = await Board.findOne({_id:id})
     if(!board){
         return res.status(404).json({error : 'No Such Board'})
     }

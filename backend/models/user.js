@@ -21,7 +21,7 @@ const user = new schema({
     createdAt: {
         required: true,
         type: String,
-        default:date.toLocaleString()
+        default: date.toLocaleString()
     },
     image: {
         required: true,
@@ -30,87 +30,94 @@ const user = new schema({
     verified: {
         required: true,
         type: Boolean,
-        default:false
+        default: false
     },
     updatedAt: {
         required: true,
         type: String,
-        default:date.toLocaleString()
+        default: date.toLocaleString()
     },
-    orgs:[
+    orgs: [
         {
-            type:mongoose.Schema.Types.ObjectId, ref: `organisation`,
+            name: { required: true, type: String },
+            createdBy: { required: true, type: mongoose.Schema.Types.ObjectId, ref: `user` },
+            image: { required: true, type: String },
+            createdAt: { required: true, type: String },
+            _id: { required: true, type: mongoose.Schema.Types.ObjectId, ref: `organisation` }
         }
     ],
-    tasks:[
+    tasks: [
         {
-            type:mongoose.Schema.Types.ObjectId, ref: `task`,
+            type: mongoose.Schema.Types.ObjectId, ref: `task`,
         }
     ],
-    projects:[
+    projects: [
         {
-            type:mongoose.Schema.Types.ObjectId, ref: `project`,
+            type: mongoose.Schema.Types.ObjectId, ref: `project`,
         }
     ],
-    sentInvites:[
+    sentInvites: [
         {
-            type:mongoose.Schema.Types.ObjectId, ref: `userInvite`,
+            type: mongoose.Schema.Types.ObjectId, ref: `userInvite`,
         }
     ],
-    invites:[
+    invites: [
         {
-            required:true,
-            type:mongoose.Schema.Types.ObjectId, ref: `userInvite`,
+            required: true,
+            type: mongoose.Schema.Types.ObjectId, ref: `userInvite`,
         }
     ],
-    openOrg:
-        {
-            type:mongoose.Schema.Types.ObjectId, ref: `organisation`,
-            default:null
-        }
+    openOrg: {
+        openOrgId: { type: mongoose.Schema.Types.ObjectId, ref: `organisation`, default: null },
+        openOrgName: { type: String, default: null }
+    },
+    openProject: {
+        openProjectId: { type: mongoose.Schema.Types.ObjectId, ref: `project`, default: null },
+        openProjectName: { type: String, default: null }
+    }
 
 })
 
 // static signup method
-user.statics.signup = async function (prop){
+user.statics.signup = async function (prop) {
     // console.log(prop)
 
     //validation
-    if(!prop.email || !prop.password){
+    if (!prop.email || !prop.password) {
         throw Error('All feilds must be filled')
     }
-    if(!validator.isEmail(prop.email)){
+    if (!validator.isEmail(prop.email)) {
         throw Error('Email is not valid')
     }
-    if(!validator.isStrongPassword(prop.password)){
+    if (!validator.isStrongPassword(prop.password)) {
         throw Error('Password not strong enough')
     }
 
-    const exists = await this.findOne({email:prop.email})
-    if(exists){
+    const exists = await this.findOne({ email: prop.email })
+    if (exists) {
         throw Error('Email already exists')
     }
-        const  salt = await bcrypt.genSalt(10)
-        prop.password = await bcrypt.hash(prop.password,salt)
-       
-        const user = await this.create(prop)
-        return user
-}   
+    const salt = await bcrypt.genSalt(10)
+    prop.password = await bcrypt.hash(prop.password, salt)
+
+    const user = await this.create(prop)
+    return user
+}
 
 //static login method
 user.statics.login = async function (prop) {
     // validation
-    if(!prop.email || !prop.password){
+    if (!prop.email || !prop.password) {
         throw Error('All feilds must be filled')
     }
-    const user = await this.findOne({email:prop.email})
-    
-    if(!user){
+    const user = await this.findOne({ email: prop.email })
+
+    if (!user) {
         throw Error('Incorrect email')
     }
-    const match = await bcrypt.compare(prop.password,user.password)
+    const match = await bcrypt.compare(prop.password, user.password)
 
-    if(!match){
+    if (!match) {
         throw Error('Incorrect Password')
     }
 

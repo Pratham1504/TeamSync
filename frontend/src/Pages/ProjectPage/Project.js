@@ -4,7 +4,7 @@ import Members from "./Members";
 import './Project.css'
 import NavBar from "../navBar";
 
-const Landing=()=>{
+const Project=()=>{
 return(
     <>
     <NavBar/>
@@ -20,4 +20,4 @@ return(
 )
 }
 
-export default Landing;
+export default Project;

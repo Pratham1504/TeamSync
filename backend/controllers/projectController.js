@@ -1,6 +1,7 @@
 const Project = require('../models/project')
 const mongoose = require('mongoose')
 const Orrg = require('../models/organisation')
+const UserSchema = require('../models/user');
 
 // Get all projects 
 const getProjects = async (req,res) =>{
@@ -30,11 +31,7 @@ const createProject = async (req,res) => {
     }
     // add doc to db
     try{
-        const project = await Project.create(req.body)
-        const id = project.orgId
-        const org = await Orrg.findById(id)
-        org.projects.push(project._id)
-        org.save()
+        const project = await Project.create(req.body)     
         res.status(200).json(project)
     }catch(err){
         res.status(400).json({error:err.message})

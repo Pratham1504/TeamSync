@@ -6,7 +6,7 @@ const Members=()=>{
 
 useEffect(()=>{
 const fetchdata=async ()=>{
-  const allinvite=await fetch('');
+  let allinvite=await fetch('');
   allinvite=await allinvite.json();
   if(allinvite.ok){
     setinvite(allinvite);

@@ -10,6 +10,7 @@ import BoardsInProject from '../BoardsInProjectPage/BoardsInProject';
 
 const Projects = () => {
     const [Projects, setProjects] = useState([]);
+    const [pr, setPr] = useState();
     // const [newprojectId, setNewProjectId] = useState("");
     const [newProjectName, setNewProjectName] = useState("");
     const [newProjectDescription, setNewProjectDescription] = useState("");
@@ -17,22 +18,35 @@ const Projects = () => {
     useEffect(() => {
         const fetchdata = async () => {
             let openOrg = JSON.parse(localStorage.getItem('user')).openOrg;
-            let org = await fetch(`/organisation/${openOrg}`);
+            // let temp = JSON.parse(localStorage.getItem('user').projects);
+            let org = await fetch(`organisation/${openOrg.openOrgId}`);
             let orgss = await org.json();
-            let projectIds = orgss.projects;
-            let projectObjs = [];
-            for (let i = 0; i < projectIds.length; i++) {
-                let temp = await fetch(`/projects/${projectIds[i]}`);
-                let tempproject = await temp.json();
-                projectObjs.push(tempproject);
-            }
-            setProjects(projectObjs);
+            // console.log(orgss);            
+            let projectss = orgss.projects;
+            setProjects(projectss);
+            // setPr(temp);
         }
         fetchdata();
-    }, [])
+    }, []);
+
+    useEffect(() => {
+        const data = async () => {
+            let id = JSON.parse(localStorage.getItem('user'))._id;
+            let temp = await fetch(`user/${id}`);
+            let tempp = await temp.json();
+            let projectss = tempp.projects;
+            setPr(projectss)
+            // console.log(pr);            
+        }
+        data();
+        // console.log(id);        
+    }, []);
 
     const addProject = async () => {
-        fetch('projects/', {
+        // console.log(pr);        
+        let tempProject;
+        // let pr = JSON.parse(localStorage.getItem('user')).projects;
+        await fetch('projects/', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -41,25 +55,85 @@ const Projects = () => {
                 name: newProjectName,
                 description: newProjectDescription,
                 createdBy: JSON.parse(localStorage.getItem('user'))._id,
-                orgId: JSON.parse(localStorage.getItem('user')).openOrg,
+                orgId: JSON.parse(localStorage.getItem('user')).openOrg.openOrgId,
             })
         })
             .then(response => response.json())
             .then(async (result) => {
-                //   console.log('Success:', result) 
-                // setNewProjectId(result._id);             
+                tempProject = {
+                    name: result.name,
+                    description: result.description,
+                    createdAt: result.createdAt,
+                    _id: result._id
+                }
+                setProjects([...Projects, tempProject]);
+                // console.log(Projects);                
             })
             .catch(error => {
-                //   console.error('Error:', error);
+                console.error('Error:', error);
             });
 
 
+        await fetch(`organisation/${JSON.parse(localStorage.getItem('user')).openOrg.openOrgId}`, {
+            method: 'PATCH',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ "projects": [...Projects, tempProject] })
+        })
+
+        // console.log(Projects);
+
+        await fetch(`user/${JSON.parse(localStorage.getItem('user'))._id}`, {
+            method: 'PATCH',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ "projects": [...pr, tempProject._id] })
+        })
+
+        // console.log("Hey3");
+
+
+        const a = JSON.parse(localStorage.user)
+        a.projects = [...pr, tempProject._id];
+        localStorage.user = JSON.stringify(a);
+
         setNewProjectName("");
         setNewProjectDescription("");
+        // console.log("hey4");        
 
     }
 
+    async function updateuser(project) {
 
+
+        const a = JSON.parse(localStorage.user)
+        // a.openOrg = organisation._id;
+        a.openProject = { 
+            openProjectId:project._id,
+            openProjectName:project.name  
+        }
+        localStorage.user = JSON.stringify(a);
+        // console.log(a)
+        window.location.reload()
+
+        await fetch(`user/${JSON.parse(localStorage.getItem('user'))._id}`, {
+            method: 'PATCH',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ "openProject":{
+                                    "openProjectId":project._id,
+                                    "openProjectName":project.name
+                                }})
+        })
+        .then(response => response.json())
+            .then(async (result) => {
+                console.log("Success!");                
+            })
+            .catch(error => {
+                console.log(error);
+            });
+
+        // console.log("Here");
+        
+
+    }  
 
     return (
         <>
@@ -81,14 +155,14 @@ const Projects = () => {
                                 </div>
                                 <div class="modal-body">
                                     <div class="mb-3 row">
-                                        <label for="inputName" class="col-sm-2 col-form-label">Name</label>
-                                        <div class="col-sm-10">
+                                        <label for="inputName" class="col-sm-12 col-form-label">Name of Project:</label>
+                                        <div class="col">
                                             <input type="text" readonly class="form-control-plaintext" id="inputName" onChange={e => setNewProjectName(e.target.value)} />
                                         </div>
                                     </div>
                                     <div class="mb-3 row">
-                                        <label for="inputDescription" class="col-sm-3 col-form-label">Description</label>
-                                        <div class="col-sm-9">
+                                        <label for="inputDescription" class="col-sm-12 col-form-label">Description of Project</label>
+                                        <div class="col">
                                             <input type="text" class="form-control" id="inputdescription" onChange={e => setNewProjectDescription(e.target.value)} />
                                         </div>
                                     </div>
@@ -100,15 +174,15 @@ const Projects = () => {
                         </div>
                     </div>
                     {Projects && Projects.map((project) => (
-                        <div className="board-details" style={{ width: "28%" }}>
-                            {/* <Link style={{textDecoration:"none"}} to="/"> */}
+                        <div className="board-details" style={{ width: "28%"}} onClick={updateuser.bind(this, project)} >
+                            <Link style={{ textDecoration: "none" }} to="/task" >
                                 <div style={{ display: "flex", alignItems: "center", justifyContent: "flex-start" }}>
                                     <h4>{project.name}</h4>
                                 </div>
                                 <p><strong>Creator: </strong>{project.description}</p>
-                                <p>{formatDistanceToNow(new Date(project.createdAt), { addSuffix: true })}</p>
+                                {/* <p>{formatDistanceToNow(new Date(project.createdAt), { addSuffix: true })}</p> */}
                                 <span className="material-symbols-outlined" onClick={() => { }}><FiMoreVertical /></span>
-                            {/* </Link> */}
+                            </Link>
                         </div>
 
                     ))}

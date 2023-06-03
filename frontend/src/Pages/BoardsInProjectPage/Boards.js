@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 // import useOrgin from "../../hooks/useOrgin";
 
 
-const Boards = ({ Project_id }) => {
+const Boards = () => {
     const [Boards, setBoards] = useState([]);
     // const [newprojectId, setNewProjectId] = useState("");
     const [newBoardName, setNewBoardName] = useState("");
@@ -15,48 +15,54 @@ const Boards = ({ Project_id }) => {
 
     useEffect(() => {
         const fetchdata = async () => {
-            let project = await fetch(`/projects/${Project_id}`);
+            let project = await fetch(`/projects/${JSON.parse(localStorage.getItem('user')).openProject.openProjectId}`);
             let projectss = await project.json();
-            let boardIds = projectss.boards;
-            let boardObjs = [];
-            for (let i = 0; i < boardIds.length; i++) {
-                let temp = await fetch(`/boards/${boardIds[i]}`);
-                let tempBoard = await temp.json();
-                boardObjs.push(tempBoard);
-            }
-            setBoards(boardObjs);            
+            let boardObjs = projectss.boards;
+            setBoards(boardObjs);
         }
         fetchdata();
     }, [])
 
     const addBoard = async () => {
-        fetch('boards/', {
+        let tempBoard;
+        await fetch('boards/', {
             method: 'POST',
             headers: {
-              'Content-Type': 'application/json'
+                'Content-Type': 'application/json'
             },
             body: JSON.stringify({
                 name: newBoardName,
                 description: newBoardDescription,
-                createdBy:JSON.parse(localStorage.getItem('user'))._id,
-                projectId:Project_id,
+                createdBy: JSON.parse(localStorage.getItem('user'))._id,
+                projectId: JSON.parse(localStorage.getItem('user')).openProject.openProjectId,
             })
-          })
+        })
             .then(response => response.json())
-            .then(async(result) =>{
-              console.log('Success:', result)              
+            .then(async (result) => {
+                console.log('Success');
+                tempBoard = {
+                    name: result.name,
+                    description: result.description,
+                    createdAt: result.createdAt,
+                    _id: result._id
+                }
+                setBoards([...Boards, tempBoard]);
             })
             .catch(error => {
-              console.error('Error:', error);
+                console.error('Error:', error);
             });
 
-
+        await fetch(`projects/${JSON.parse(localStorage.getItem('user')).openProject.openProjectId}`, {
+            method: 'PATCH',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ "boards": [...Boards, tempBoard] })
+        })
         setNewBoardName("");
         setNewBoardDescription("");
 
-    } 
+    }
 
-    
+
 
     return (
         <>
@@ -73,19 +79,19 @@ const Boards = ({ Project_id }) => {
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">New Project</h5>
+                                    <h5 class="modal-title" id="exampleModalLabel">New Board</h5>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
                                     <div class="mb-3 row">
-                                        <label for="inputName" class="col-sm-2 col-form-label">Name</label>
-                                        <div class="col-sm-10">
+                                        <label for="inputName" class="col-sm-12 col-form-label">Name of Board:</label>
+                                        <div class="col">
                                             <input type="text" readonly class="form-control-plaintext" id="inputName" onChange={e => setNewBoardName(e.target.value)} />
                                         </div>
                                     </div>
                                     <div class="mb-3 row">
-                                        <label for="inputDescription" class="col-sm-3 col-form-label">Description</label>
-                                        <div class="col-sm-9">
+                                        <label for="inputDescription" class="col-sm-12 col-form-label">Description of Board:</label>
+                                        <div class="col">
                                             <input type="text" class="form-control" id="inputdescription" onChange={e => setNewBoardDescription(e.target.value)} />
                                         </div>
                                     </div>

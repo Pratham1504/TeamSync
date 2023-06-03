@@ -37,8 +37,11 @@ const organisation = new schema({
 
     projects:[
         {
-            required: true,
-            type: mongoose.Schema.Types.ObjectId, ref: `project`,
+            // type:mongoose.Schema.Types.ObjectId, ref: `organisation`,
+            name:{required: true,type:String},
+            description:{required: true,type:String},
+            _id:{required: true,type: mongoose.Schema.Types.ObjectId, ref:`project`},
+            createdAt:{required:true , type:String}
         }
     ],
 

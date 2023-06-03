@@ -13,6 +13,7 @@ import Project from './Pages/ProjectPage/Project';
 import ProfilePage from './Pages/profile/profilePage';
 import useAuthContext from './hooks/useAuthContext';
 import { AuthContext } from './context/authContext';
+import BoardsInProject from './Pages/BoardsInProjectPage/BoardsInProject';
 
 
 
@@ -28,7 +29,7 @@ console.log(user)
             <Routes>
                 <Route
                     exact path="/"
-                    element={user?(user.openOrg?(<Navigate to ="/home"/>):(<Landing/>)):(<Navigate  to={'/login'}/>) }
+                    element={user?(user.openOrg.openOrgId?(<Navigate to ="/home"/>):(<Landing/>)):(<Navigate  to={'/login'}/>) }
                 />
                 <Route
                     exact path='/login'
@@ -39,20 +40,24 @@ console.log(user)
                     element={user ? <Navigate to ='/'/> : <SignUp/>}
                 />
                 <Route
+                    exact path='/task'
+                    element={user ? user.openOrg.openOrgId?user.openProject.openProjectId?<BoardsInProject/>:<Project/>:<Navigate to="/"/>: <Navigate to='/login'/>}
+                />
+                <Route
                     exact path='/board'
-                    element={user ? user.openOrg?<Board/>:<Navigate to="/"/>: <Navigate to='/login'/>}
+                    element={user ? user.openOrg.openOrgId?<Board/>:<Navigate to="/"/>: <Navigate to='/login'/>}
                 />
                 <Route
                     exact path='/projects'
-                    element={user ? user.openOrg?<Project/>:<Navigate to="/"/>:<Navigate to='/login'/>}
+                    element={user ? user.openOrg.openOrgId?<Project/>:<Navigate to="/"/>:<Navigate to='/login'/>}
                 />
                 <Route
                     exact path='/orgdetails'
-                    element={user ? user.openOrg?<OrgDetails/>:<Navigate to="/"/>:<Navigate to='/login'/>}
+                    element={user ? user.openOrg.openOrgId?<OrgDetails/>:<Navigate to="/"/>:<Navigate to='/login'/>}
                     />
                 <Route
                     exact path='/home'
-                    element={user ?user.openOrg?<Home/>:<Navigate to="/"/>:<Navigate to='/login'/>}
+                    element={user ?user.openOrg.openOrgId?<Home/>:<Navigate to="/"/>:<Navigate to='/login'/>}
                 />
                 <Route
                     exact path='/*'
@@ -64,7 +69,7 @@ console.log(user)
                 />
                 <Route
                     exact path='/profile'
-                    element={user ?user.openOrg?<ProfilePage/>:<Navigate to="/"/> :<Navigate to='/login'/>}
+                    element={user ?user.openOrg.openOrgId?<ProfilePage/>:<Navigate to="/"/> :<Navigate to='/login'/>}
                 />
             </Routes>
         </BrowserRouter>

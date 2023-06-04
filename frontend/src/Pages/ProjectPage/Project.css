@@ -87,7 +87,7 @@
     margin-bottom: 20px;
   }
 
-  .modal { position: fixed; top:15=vh; left:0%; }   
+  .modal { position: fixed; top:0vh; left:0%;  }   
   
   input[type="submit"] {
     background-color: rgb(56, 56, 255);

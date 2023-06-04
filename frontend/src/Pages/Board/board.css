@@ -46,3 +46,106 @@ body{
   .card::-webkit-scrollbar {
     display: none;
   }
+
+  .label{
+    font-weight: bold;
+  }
+
+  .description {
+    background-color: #eeeeee;
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    color: #555;
+    margin-bottom: 10px;
+  }
+
+  .attachments {
+    background-color: #eeeeee;
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    color: #555;
+    margin-bottom: 10px;
+  }
+
+  .attachments ul {
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+    display: flex;
+  }
+
+  .attachments ul li {
+    margin-left: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: rgb(218, 218, 255);
+  }
+
+  .attachments ul li a {
+    color: #333;
+    text-decoration: none;
+  }
+
+  .comments {
+    background-color: #eeeeee;
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    color: #555;
+    margin-bottom: 10px;
+  }
+
+  .comments ul {
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+  }
+
+  .comments ul li {
+    margin-bottom: 10px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 5px;
+  }
+
+  .comments ul li:last-child {
+    border-bottom: none;
+  }
+
+  .comments ul li p {
+    margin: 0;
+    color: #333;
+  }
+
+  .add-comment {
+    background-color: #eeeeee;
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    color: #555;
+  }
+
+  .add-comment textarea {
+    width: 100%;
+    height: 50px;
+    resize: vertical;
+    border: 1px solid #ccc;
+    padding: 5px;
+    margin-bottom: 10px;
+  }
+
+  .add-comment button {
+    background-color: blue;
+    color: #c6c6c6;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+  }
+
+  .add-comment button:hover {
+    background-color: rgb(40, 40, 255);
+  }
+
+  .modal{
+    --bs-modal-width:700px;
+  }

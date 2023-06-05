@@ -2,35 +2,53 @@ import React, { useEffect, useState } from "react";
 import './board.css'
 import NavBar from "../navBar";
 import TaskCard from './TaskCard';
-import { useGlobalTaskContext } from '../../context/taskContext';
+// import { useGlobalTaskContext } from '../../context/taskContext';
 import './board.css'
 import { RiMessage3Line, RiAttachment2 } from 'react-icons/ri';
 import { Link } from "react-router-dom";
 import formatDistanceToNow from 'date-fns/formatDistanceToNow';
+import { intervalToDuration } from "date-fns";
 
 
 const Task = () => {
-    const { tasks, isLoading } = useGlobalTaskContext()
-    const [tassk, uptassk] = useState(new Map());
-    const [lenth, uplenth] = useState(0);
+   const [tassk,uptassk]=useState(new Map());
+   
+  const [tasks,collecttasks]=useState([]);
+    var word=[];
+    var taskk;
+    useEffect(()=>{
+    
+        const total=async ()=>{
+           taskk=await fetch("/tasks/");
+            taskk=await taskk.json();
+            collecttasks(taskk);
+        }
+        total();
+
+},[]);
 
     useEffect(() => {
+        console.log("cheeku")
+        console.log(tasks);
+        console.log("aditya")
         tasks.map((steptask) => {
-            console.log("cheeku")
             if (!tassk.has(steptask.category)) {
-                console.log("cheeku");
-                tassk[steptask.category] = [steptask];
+                tassk.set(steptask.category);
+                tassk[steptask.category]=[]
+                console.log("aditya")
+                tassk[steptask.category].push(steptask);
             }
             else {
-                const updatedtask = [...uptassk[steptask.category], steptask];
-                uptassk[steptask.category] = updatedtask;
-
+                tassk[steptask.category].push(steptask)
             }
-            uplenth(Object.keys(tassk).length)
         })
-    }, [tasks]);
-
-    if (lenth > 0) {
+        uptassk(tassk);
+        console.log(Object.keys(tassk));
+    },[tasks])
+  const post=async ()=>{
+  }
+  
+    if (tassk.size) {
         return (
 
             <>
@@ -42,7 +60,7 @@ const Task = () => {
                         <div className="card">
                             <div style={{ justifyContent: "space-between", display: "flex", marginBottom: "5%" }}>
                                 <h3>{key}</h3>
-                                <button>+</button>
+                                <button onClick={post}>+</button>
                             </div>
 
                             {tassk[key].map(value1 => (

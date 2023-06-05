@@ -15,13 +15,12 @@ const Organisation = () => {
 
 
     useEffect(() => {
-
         const fetchdata = async () => {
             const org = JSON.parse(localStorage.getItem('user')).orgs
             setorgs(org);
         }
         fetchdata();
-    }, []);
+    }, [orgs]);
 
 
 
@@ -93,6 +92,23 @@ const Organisation = () => {
             method: 'PATCH',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ "orgs": [...orgs, temporg] })
+        })
+
+        let temp = await fetch(`organisation/${temporg._id}`);
+        let tempOrg = await temp.json();
+        let members = tempOrg.members;
+
+        let newMemberAcceptObj = {
+            name:JSON.parse(localStorage.getItem('user')).name,
+            email:JSON.parse(localStorage.getItem('user')).email,
+            image:JSON.parse(localStorage.getItem('user')).image,
+            _id:JSON.parse(localStorage.getItem('user'))._id
+        }
+
+        await fetch(`organisation/${temporg._id}`, {
+            method: 'PATCH',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ "members": [...members, newMemberAcceptObj] })
         })
 
         const a = JSON.parse(localStorage.user)

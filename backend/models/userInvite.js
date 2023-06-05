@@ -14,12 +14,7 @@ const userInvite = new schema({
         required: true,
         type: Date,
         default:Date.now()
-    },
-
-    updatedAt: {
-        type: Date,
-    },
-    
+    },    
     org:{
             required: true,
             type: mongoose.Schema.Types.ObjectId, ref: `organisation`,

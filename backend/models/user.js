@@ -63,8 +63,10 @@ const user = new schema({
     ],
     invites: [
         {
-            required: true,
-            type: mongoose.Schema.Types.ObjectId, ref: `userInvite`,
+            OrgName: { required: true, type: String },
+            OrgId : {required: true, type: mongoose.Schema.Types.ObjectId, ref: `organisation`},
+            InvitedByName: { required: true, type: String },
+            InviteId: { required: true, type: mongoose.Schema.Types.ObjectId, ref: `userInvite` }
         }
     ],
     openOrg: {

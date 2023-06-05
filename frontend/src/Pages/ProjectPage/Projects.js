@@ -27,7 +27,7 @@ const Projects = () => {
             // setPr(temp);
         }
         fetchdata();
-    }, []);
+    }, [Projects]);
 
     useEffect(() => {
         const data = async () => {
@@ -106,9 +106,9 @@ const Projects = () => {
 
         const a = JSON.parse(localStorage.user)
         // a.openOrg = organisation._id;
-        a.openProject = { 
-            openProjectId:project._id,
-            openProjectName:project.name  
+        a.openProject = {
+            openProjectId: project._id,
+            openProjectName: project.name
         }
         localStorage.user = JSON.stringify(a);
         // console.log(a)
@@ -117,23 +117,25 @@ const Projects = () => {
         await fetch(`user/${JSON.parse(localStorage.getItem('user'))._id}`, {
             method: 'PATCH',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ "openProject":{
-                                    "openProjectId":project._id,
-                                    "openProjectName":project.name
-                                }})
+            body: JSON.stringify({
+                "openProject": {
+                    "openProjectId": project._id,
+                    "openProjectName": project.name
+                }
+            })
         })
-        .then(response => response.json())
+            .then(response => response.json())
             .then(async (result) => {
-                console.log("Success!");                
+                console.log("Success!");
             })
             .catch(error => {
                 console.log(error);
             });
 
         // console.log("Here");
-        
 
-    }  
+
+    }
 
     return (
         <>
@@ -174,7 +176,7 @@ const Projects = () => {
                         </div>
                     </div>
                     {Projects && Projects.map((project) => (
-                        <div className="board-details" style={{ width: "28%"}} onClick={updateuser.bind(this, project)} >
+                        <div className="board-details" style={{ width: "28%" }} onClick={updateuser.bind(this, project)} >
                             <Link style={{ textDecoration: "none" }} to="/task" >
                                 <div style={{ display: "flex", alignItems: "center", justifyContent: "flex-start" }}>
                                     <h4>{project.name}</h4>

@@ -1,89 +1,119 @@
 import { useEffect, useState } from "react"
 import useAuthContext from '../../hooks/useAuthContext';
 import NavBar from "../navBar";
-import './OrgDetails.css'
+import './OrgDetails.css';
+import { IoIosAddCircleOutline } from 'react-icons/io';
+
+import { FiMoreVertical } from 'react-icons/fi';
 import MemberCard from "./MemberCard";
 // import Member from '../../components/Member';
 // const mongoose=require('mongoose') 
 
 const User = () => {
-    const [org, setorg] = useState(null);
+    const [members, setMembers] = useState();
     const [owner, setowner] = useState(null);
     const { user } = useAuthContext();
+    const [newMemberId, setNewMemberId] = useState("");
+    const [newMemberEmail, setNewMemberEmail] = useState("");
 
     useEffect(() => {
-
-        console.log(user)
-
-        const getOrg = async () => {
-
-            const orgg = await fetch(`organisation/${user.openOrg}`);
-            const orggg = await orgg.json()
-            setorg(orggg);
+        const fetchdata = async () => {
+            let openOrg = JSON.parse(localStorage.getItem('user')).openOrg;
+            let org = await fetch(`organisation/${openOrg.openOrgId}`);
+            let orgss = await org.json();
+            let memberss = orgss.members;
+            setMembers(memberss);
         }
-        getOrg();
-    }, [])
+        fetchdata();
+    }, [members]);
 
-    useEffect(() => {
-        const getowner = async () => {
-            const ownerr = await fetch(`user/${org.createdBy}`)
-            const ownerrr = await ownerr.json();
-            setowner(ownerrr)
+    const addMember = async () => {
+
+        let newInviteId;
+
+        await fetch('userInvites/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                invitee: newMemberId,
+                email: newMemberEmail,
+                invitedBy: JSON.parse(localStorage.getItem('user'))._id,
+                org: JSON.parse(localStorage.getItem('user')).openOrg.openOrgId,
+            })
+        })
+            .then(response => response.json())
+            .then(async (result) => {
+                newInviteId = result._id;
+                console.log("Success!");
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        
+        // console.log(newInviteId , " Hey");        
+        const user = JSON.parse(localStorage.getItem('user'));
+        const sentInvites = user.sentInvites;
+        
+        await fetch(`user/${JSON.parse(localStorage.getItem('user'))._id}`, {
+            method: 'PATCH',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ "sentInvites": [...sentInvites, newInviteId] })
+        })
+
+        user.sentInvites = [...sentInvites, newInviteId];
+        localStorage.user = JSON.stringify(user);
+
+
+
+        let newMember = await fetch(`user/${newMemberId}`);
+        let newMemberObj = await newMember.json();
+        let newMemberInvites = newMemberObj.invites;
+        let newMemberInviteUpdateObj = {
+            OrgId:JSON.parse(localStorage.getItem('user')).openOrg.openOrgId,
+            OrgName:JSON.parse(localStorage.getItem('user')).openOrg.openOrgName,
+            InvitedByName:JSON.parse(localStorage.getItem('user')).name,
+            InviteId:newInviteId
         }
-        getowner();
-    }, [org]);
-    console.log(owner)
 
-    const projects=[
-        {
-            id:1,
-            name:'projName',
-            description:'hello',
-            updatedAt:'8 hours',
-            boards:['abcd123','dcba321']
-            
-        },
-        {
-            id:1,
-            name:'projName',
-            description:'hello',
-            updatedAt:'8 hours',
-            boards:['abcd123','dcba321']
-            
-        },
-        {
-            id:1,
-            name:'projName',
-            description:'hello',
-            updatedAt:'8 hours',
-            boards:['abcd123','dcba321']
-            
-        },
-        {
-            id:1,
-            name:'projName',
-            description:'hello',
-            updatedAt:'8 hours',
-            boards:['abcd123','dcba321']
-            
-        },
-        {
-            id:1,
-            name:'projName',
-            description:'hello',
-            updatedAt:'8 hours',
-            boards:['abcd123','dcba321']
-            
-        },
-        {
-            id:1,
-            name:'projName',
-            description:'hello',
-            updatedAt:'8 hours',
-            boards:['abcd123','dcba321']
-            
-        },
-    ]
+        // console.log(newMemberInviteUpdateObj," hjfka");
+        
+
+        await fetch(`user/${newMemberId}` , {
+            method: 'PATCH',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ "invites": [...newMemberInvites, newMemberInviteUpdateObj] })
+        })
+
+
+        
+
+        setNewMemberId("");
+        setNewMemberEmail("");
+
+    }
+
+    // useEffect(() => {
+    //     const getowner = async () => {
+    //         const ownerr = await fetch(`user/${org.createdBy}`)
+    //         const ownerrr = await ownerr.json();
+    //         setowner(ownerrr)
+    //     }
+    //     getowner();
+    // }, [org]);
+    // console.log(owner)
+
+    // const projects = [
+    //     {
+    //         id: 1,
+    //         name: 'projName',
+    //         description: 'hello',
+    //         updatedAt: '8 hours',
+    //         boards: ['abcd123', 'dcba321']
+
+    //     },
+    // ]
     return (
         <>
             <NavBar />
@@ -101,18 +131,66 @@ const User = () => {
                 <div style={{ width: "8px", backgroundColor: "blue", marginRight: "8px", borderRadius: "20%" }}>.</div>
                 <h2 class="text-xl font-semibold">Members</h2>
             </div>
-            <section class="px-4 md:px-8 projects__container">
-            <div>
-                    <ul class="overflow-auto flex">
-            {projects.map((project) => (
-              <li key={project.id}>
-                <MemberCard id={project.id} names={project.name} description={project.description} updatedAt={project.updatedAt} boards={project.boards.length} />
-              </li>
-            ))}
-          </ul>
+            <div className="orgss" style={{ display: "flex", overflowX: "auto" }}>
+
+                <div className="org-details" data-bs-toggle="modal" data-bs-target="#Create-Board" style={{ fontSize: "150%", display: "flex", justifyContent: "center", alignItems: "center", backgroundColor: "#f1f1f1" }}>
+                    <IoIosAddCircleOutline /> <p>Add Members</p>
                 </div>
+
+                <div class="modal fade" id="Create-Board" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Add New Member</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="modal-body">
+                                    <div class="mb-3 row">
+                                        <label for="inputName" class="col-sm-12 col-form-label">Id of User:</label>
+                                        <div class="col">
+                                            <input type="text" readonly class="form-control-plaintext" id="inputName" onChange={e => setNewMemberId(e.target.value)} />
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 row">
+                                        <label for="inputDescription" class="col-sm-12 col-form-label">Email of User:</label>
+                                        <div class="col">
+                                            <input type="text" class="form-control" id="inputdescription" onChange={e => setNewMemberEmail(e.target.value)} />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onClick={addMember}>Add Member</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {members && members.map((member) => (
+                    <div className="board-details" style={{ width: "28%" }} >
+                        <div style={{ display: "flex", alignItems: "center", justifyContent: "flex-start" }}>
+                            <img src={member.image} style={{ height: "7vh", width: "5vh" }} alt="" />
+                            <h4>{member.name}</h4>
+                        </div>
+                        <p><strong>Creator: </strong>{member.email}</p>
+                    </div>
+
+                ))}
+
+            </div>
+            {/* <section class="px-4 md:px-8 projects__container">
             
-            </section>
+                <div>
+                    <ul class="overflow-auto flex">
+                        {projects.map((project) => (
+                            <li key={project.id}>
+                                <MemberCard id={project.id} names={project.name} description={project.description} updatedAt={project.updatedAt} boards={project.boards.length} />
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+
+            </section> */}
 
         </>
     )

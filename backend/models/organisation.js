@@ -22,19 +22,18 @@ const organisation = new schema({
         required:true,
         type:mongoose.Schema.Types.ObjectId, ref: `user`
     },
-
-    members:[
+    members: [
         {
-            required:true,
-            type:mongoose.Schema.Types.ObjectId, ref: `user`,
+            name: { required: true, type: String },
+            email: { required: true, type: String },
+            image: { required: true, type: String },
+            _id: { required: true, type: mongoose.Schema.Types.ObjectId, ref: `user` }
         }
     ],
-
     image: {
         required: true,
         type: String,
     },
-
     projects:[
         {
             // type:mongoose.Schema.Types.ObjectId, ref: `organisation`,

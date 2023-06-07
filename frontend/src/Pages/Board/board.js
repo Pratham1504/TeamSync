@@ -11,21 +11,21 @@ import { intervalToDuration } from "date-fns";
 
 
 const Task = () => {
-   const [tassk,uptassk]=useState(new Map());
-   
-  const [tasks,collecttasks]=useState([]);
-    var word=[];
+    const [tassk, uptassk] = useState(new Map());
+
+    const [tasks, collecttasks] = useState([]);
+    var word = [];
     var taskk;
-    useEffect(()=>{
-    
-        const total=async ()=>{
-           taskk=await fetch("/tasks/");
-            taskk=await taskk.json();
+    useEffect(() => {
+
+        const total = async () => {
+            taskk = await fetch("/tasks/");
+            taskk = await taskk.json();
             collecttasks(taskk);
         }
         total();
 
-},[]);
+    }, []);
 
     useEffect(() => {
         console.log("cheeku")
@@ -34,7 +34,7 @@ const Task = () => {
         tasks.map((steptask) => {
             if (!tassk.has(steptask.category)) {
                 tassk.set(steptask.category);
-                tassk[steptask.category]=[]
+                tassk[steptask.category] = []
                 console.log("aditya")
                 tassk[steptask.category].push(steptask);
             }
@@ -44,10 +44,10 @@ const Task = () => {
         })
         uptassk(tassk);
         console.log(Object.keys(tassk));
-    },[tasks])
-  const post=async ()=>{
-  }
-  
+    }, [tasks])
+    const post = async () => {
+    }
+
     if (tassk.size) {
         return (
 
@@ -60,12 +60,73 @@ const Task = () => {
                         <div className="card">
                             <div style={{ justifyContent: "space-between", display: "flex", marginBottom: "5%" }}>
                                 <h3>{key}</h3>
-                                <button onClick={post}>+</button>
+                                <button data-bs-toggle="modal" data-bs-target="#Task-add" onClick={post}>+</button>
+                            </div>
+                            <div className="modal fade" id="Task-add" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" style={{}}>
+                                <div className="modal-dialog">
+                                    <div className="modal-content">
+                                        <div className="modal-header">
+                                            <h5 className="modal-title" id="exampleModalLabel">Add task to {key}</h5>
+                                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div className="modal-body" style={{ fontSize: "16px" }}>
+                                            <div class="mb-3 row">
+                                                <label for="inputName" class="col-sm-12 col-form-label">Task:</label>
+                                                <div class="col">
+                                                    <input type="text" readonly class="form-control-plaintext" id="inputName" onChange={() => { }} />
+                                                </div>
+                                            </div>
+                                            <div class="mb-3 row">
+                                                <label for="inputDescription" class="col-sm-12 col-form-label">Description of Task</label>
+                                                <div class="col">
+                                                    <input type="text" class="form-control" id="inputdescription" onChange={() => { }} />
+                                                </div>
+                                            </div>
+                                            <div style={{ display: "flex", justifyContent: "space-between" }}>
+                                                <p class="label">Priority:</p>
+                                                <div class="priority">
+                                                    <select>
+                                                        <option>High</option>
+                                                        <option>Medium</option>
+                                                        <option>Low</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div style={{alignItems:"center"}}>
+                                                <label for="category">Select or Enter a Category:</label>
+                                                <select id="category" name="category">
+                                                    <option value="" selected disabled hidden>Choose an option</option>
+                                                    <option value="option1">Option 1</option>
+                                                    <option value="option2">Option 2</option>
+                                                    <option value="option3">Option 3</option>
+                                                    <option value="new">Enter a new category</option>
+
+                                                </select>
+                                                <input type="text" id="new-category" name="new-category" placeholder="Enter a new category" />
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onClick={() => { }}>Add Task</button>
+
+
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
 
-                            {tassk[key].map(value1 => (
 
-                                <div className="taskcard" data-bs-toggle="modal" data-bs-target="#Task-modal" onClick={() => { }}>
+                            {tassk[key].map(value1 => (
+                                <div>
+
+                                    <div className="taskcard" data-bs-toggle="modal" data-bs-target="#Task-modal" onClick={() => { }}>
+
+                                        <div style={{ textDecoration: "none" }}><h3>{value1.title}</h3></div>
+                                        <p style={{ wordBreak: "break-all", whiteSpace: "normal" }}>{value1.description}</p>
+                                        <div style={{ justifyContent: "flex-end", display: "flex", fontSize: "120%" }}>
+                                            <div style={{ margin: "1%" }}><RiMessage3Line /></div>
+                                            <div style={{ margin: "1%" }}><RiAttachment2 /></div>
+                                        </div>
+                                    </div>
                                     <div className="modal fade" id="Task-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" style={{}}>
                                         <div className="modal-dialog">
                                             <div className="modal-content">
@@ -85,21 +146,21 @@ const Task = () => {
                                                             <p>{formatDistanceToNow(new Date(value1.updatedAt), { addSuffix: true })}</p>
                                                         </div>
 
-                                                        <div style={{ display: "flex" ,onClick:()=>{},cursor:"pointer"}}>
-                                                            <p class="label" style={{color:"red",fontSize: "14px"}}>Delete task</p>
+                                                        <div style={{ display: "flex", onClick: () => { }, cursor: "pointer" }}>
+                                                            <p class="label" style={{ color: "red", fontSize: "14px" }}>Delete task</p>
                                                         </div>
 
                                                     </div>
                                                     <div style={{ display: "flex", justifyContent: "space-between" }}>
-                                                            <p class="label">Assigned To:</p>
-                                                            <select aria-invalid>
-                                                                <option>assignees</option>
-                                                                <option>muhawara</option>
-                                                                <option>piyush</option>
-                                                                <option>agrawal</option>
-                                                                <option>raghav</option>
-                                                            </select>
-                                                        </div>
+                                                        <p class="label">Assigned To:</p>
+                                                        <select aria-invalid>
+                                                            <option>assignees</option>
+                                                            <option>muhawara</option>
+                                                            <option>piyush</option>
+                                                            <option>agrawal</option>
+                                                            <option>raghav</option>
+                                                        </select>
+                                                    </div>
                                                     <div style={{ display: "flex", justifyContent: "space-between" }}>
                                                         <p class="label">Priority:</p>
                                                         <div class="priority">
@@ -138,20 +199,14 @@ const Task = () => {
 
                                                     <div class="add-comment"  >
                                                         <p class="label">Add Comment:</p>
-                                                        <textarea style={{resize:"verticle",}}></textarea>
+                                                        <textarea style={{ resize: "verticle", }}></textarea>
                                                         {/* button for adding comments */}
-                                                        <button>Add</button>  
+                                                        <button>Add</button>
 
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div style={{ textDecoration: "none" }}><h3>{value1.title}</h3></div>
-                                    <p style={{ wordBreak: "break-all", whiteSpace: "normal" }}>{value1.description}</p>
-                                    <div style={{ justifyContent: "flex-end", display: "flex", fontSize: "120%" }}>
-                                        <div style={{ margin: "1%" }}><RiMessage3Line /></div>
-                                        <div style={{ margin: "1%" }}><RiAttachment2 /></div>
                                     </div>
                                 </div>
 

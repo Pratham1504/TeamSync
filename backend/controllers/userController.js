@@ -35,6 +35,13 @@ const signupUser = async (req,res) =>{
     }
 }
 
+const getAllUsers = async (req, res) => {
+
+    const users = await User.find();
+    res.status(200).json(users);
+
+}
+
 const userupdate=async(req,res)=>{
     const {id}=req.params;
     if(!mongoose.Types.ObjectId.isValid(id)){
@@ -62,4 +69,4 @@ const finduser=async(req,res)=>{
       }
      res.json(user)
 }
-module.exports = {loginUser,signupUser,userupdate,finduser}
+module.exports = {loginUser,signupUser,userupdate,finduser,getAllUsers}

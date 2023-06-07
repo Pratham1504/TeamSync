@@ -1,18 +1,18 @@
 import { useEffect, useState } from "react"
-import useAuthContext from '../../hooks/useAuthContext';
+// import useAuthContext from '../../hooks/useAuthContext';
 import NavBar from "../navBar";
 import './OrgDetails.css';
 import { IoIosAddCircleOutline } from 'react-icons/io';
 
-import { FiMoreVertical } from 'react-icons/fi';
-import MemberCard from "./MemberCard";
+// import { FiMoreVertical } from 'react-icons/fi';
+// import MemberCard from "./MemberCard";
 // import Member from '../../components/Member';
 // const mongoose=require('mongoose') 
 
 const User = () => {
     const [members, setMembers] = useState();
-    const [owner, setowner] = useState(null);
-    const { user } = useAuthContext();
+    // const [owner, setowner] = useState(null);
+    // const { user } = useAuthContext();
     const [newMemberId, setNewMemberId] = useState("");
     const [newMemberEmail, setNewMemberEmail] = useState("");
 
@@ -30,6 +30,11 @@ const User = () => {
     const addMember = async () => {
 
         let newInviteId;
+
+        let temp = await fetch('user/');
+        let tempUser = await temp.json();
+        const filteredUser = tempUser.filter(person => person.email === newMemberEmail);
+        setNewMemberId(filteredUser[0]._id);
 
         await fetch('userInvites/', {
             method: 'POST',
@@ -146,12 +151,6 @@ const User = () => {
                             </div>
                             <div class="modal-body">
                                 <div class="modal-body">
-                                    <div class="mb-3 row">
-                                        <label for="inputName" class="col-sm-12 col-form-label">Id of User:</label>
-                                        <div class="col">
-                                            <input type="text" readonly class="form-control-plaintext" id="inputName" onChange={e => setNewMemberId(e.target.value)} />
-                                        </div>
-                                    </div>
                                     <div class="mb-3 row">
                                         <label for="inputDescription" class="col-sm-12 col-form-label">Email of User:</label>
                                         <div class="col">

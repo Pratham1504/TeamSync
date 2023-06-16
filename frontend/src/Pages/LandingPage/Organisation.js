@@ -11,7 +11,7 @@ const Organisation = () => {
     const [orgs, setorgs] = useState();
     const [newOrgName, setNewOrgName] = useState("");
     const [newOrgImage, setNewOrgImage] = useState("");
-
+    
 
     // useEffect(() => {
     //     const fetchdata = async () => {

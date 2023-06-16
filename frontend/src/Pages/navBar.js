@@ -63,7 +63,7 @@ const NavBar = () => {
                 <nav class="navbar navbar-expand-lg bg-body-tertiary">
                     <div class="container-fluid">
                         <img src="https://www.clipartmax.com/png/small/413-4139811_transparent-background-cool-logo.png" alt="Transparent Background Cool Logo @clipartmax.com" style={{ height: "5vh", marginLeft: "0", paddingLeft: '0', }} />
-                        <Link to="/" className="Pname nav-link active" style={{ textDecoration: "none", color: "black", fontSize: "150%", fontWeight: "bold", marginRight: "2%", marginLeft: "1%" }} onClick={orgout}>Project2023</Link>
+                        <Link to="/" className="Pname nav-link active" style={{ textDecoration: "none", color: "black", fontSize: "150%", fontWeight: "bold", marginRight: "2%", marginLeft: "1%" }} onClick={orgout}>TeamSync</Link>
                         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-icon"></span>
                         </button>

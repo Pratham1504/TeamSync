@@ -40,7 +40,7 @@ const Login = () => {
                     <Link to='/signUp' style={{"textDecoration":"none","color":"blue","marginTop":"10px"}}>Are you new to Project2023?</Link>
                 </div>
                 <div class="screenshots-section">
-                    <h3>Project2023</h3>
+                    <h3 ><bold>TeamSync</bold></h3>
                     <div class="screenshot1"></div>
                     <div class="screenshot2"></div>
                     <div class="screenshot3"></div>

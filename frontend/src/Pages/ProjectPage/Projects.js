@@ -181,7 +181,7 @@ const Projects = () => {
                                 <div style={{ display: "flex", alignItems: "center", justifyContent: "flex-start" }}>
                                     <h4>{project.name}</h4>
                                 </div>
-                                <p><strong>Creator: </strong>{project.description}</p>
+                                <p style={{overflow:"hidden "}}><strong>Creator: </strong>{project.description}</p>
                                 {/* <p>{formatDistanceToNow(new Date(project.createdAt), { addSuffix: true })}</p> */}
                                 <span className="material-symbols-outlined" onClick={() => { }}><FiMoreVertical /></span>
                             </Link>

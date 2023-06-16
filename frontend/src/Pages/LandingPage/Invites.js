@@ -1,24 +1,24 @@
 import React, { useEffect, useState } from "react";
-import formatDistanceToNow from 'date-fns/formatDistanceToNow';
+// import formatDistanceToNow from 'date-fns/formatDistanceToNow';
 
 const Invites = () => {
     const [invite, setInvite] = useState([]);
 
-    useEffect(() => {
+    // useEffect(() => {
 
-        const fetchdata = async () => {
-            let id = JSON.parse(localStorage.getItem('user'))._id;
-            const user = await fetch(`user/${id}`);
-            // console.log("ethe")
-            const users = await user.json();
-            const allInvites = users.invites;
-            setInvite(allInvites);
-        }
+    //     const fetchdata = async () => {
+    //         let id = JSON.parse(localStorage.getItem('user'))._id;
+    //         const user = await fetch(`user/${id}`);
+    //         // console.log("ethe")
+    //         const users = await user.json();
+    //         const allInvites = users.invites;
+    //         setInvite(allInvites);
+    //     }
 
-        fetchdata();
+    //     fetchdata();
 
 
-    }, [invite])
+    // }, [invite])
 
     const handleDelete = async (Orgid , Inviteid) => {
         const index = invite.findIndex(obj => obj._id === Inviteid);

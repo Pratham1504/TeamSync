@@ -1,26 +1,25 @@
 import React, { useEffect, useState } from "react";
-import formatDistanceToNow from 'date-fns/formatDistanceToNow';
+// import formatDistanceToNow from 'date-fns/formatDistanceToNow';
 import { FiMoreVertical } from 'react-icons/fi';
 import { IoIosAddCircleOutline } from 'react-icons/io'
-import { json, Link } from "react-router-dom";
-import useAuthContext from '../../hooks/useAuthContext';
+import {  Link } from "react-router-dom";
+// import useAuthContext from '../../hooks/useAuthContext';
 
 
 const Organisation = () => {
     // const {user} =  useAuthContext()
-    const [a, aa] = useState({})
     const [orgs, setorgs] = useState();
     const [newOrgName, setNewOrgName] = useState("");
     const [newOrgImage, setNewOrgImage] = useState("");
 
 
-    useEffect(() => {
-        const fetchdata = async () => {
-            const org = JSON.parse(localStorage.getItem('user')).orgs
-            setorgs(org);
-        }
-        fetchdata();
-    }, [orgs]);
+    // useEffect(() => {
+    //     const fetchdata = async () => {
+    //         const org = JSON.parse(localStorage.getItem('user')).orgs
+    //         setorgs(org);
+    //     }
+    //     fetchdata();
+    // }, [orgs]);
 
 
 

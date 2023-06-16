@@ -10,14 +10,14 @@ const NavBar = () => {
     const { logout } = useLogout()
     const user = JSON.parse(localStorage.getItem('user'))
 
-    useEffect(() => {
-        const getOrg = async () => {
-            const orgg = JSON.parse(localStorage.getItem('user')).openOrg;
-            // const orggg = await orgg.json()
-            setOrgOpen(orgg);
-        }
-        getOrg();
-    }, [user])
+    // useEffect(() => {
+    //     const getOrg = async () => {
+    //         const orgg = JSON.parse(localStorage.getItem('user')).openOrg;
+    //         // const orggg = await orgg.json()
+    //         setOrgOpen(orgg);
+    //     }
+    //     getOrg();
+    // }, [user])
     const clickHandler = () => {
         logout()
     }
@@ -39,20 +39,20 @@ const NavBar = () => {
 
         document.location.reload()
 
-        const userr = await fetch(`/user/${user._id}`, {
-            method: 'PATCH',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                "openOrg": {
-                    "openOrgId": null,
-                    "openOrgName": null
-                },
-                "openProject":{
-                    "openProjectId": null,
-                    "openProjectName": null
-                }
-            })
-        })
+        // const userr = await fetch(`/user/${user._id}`, {
+        //     method: 'PATCH',
+        //     headers: { 'Content-Type': 'application/json' },
+        //     body: JSON.stringify({
+        //         "openOrg": {
+        //             "openOrgId": null,
+        //             "openOrgName": null
+        //         },
+        //         "openProject":{
+        //             "openProjectId": null,
+        //             "openProjectName": null
+        //         }
+        //     })
+        // })
 
 
     }

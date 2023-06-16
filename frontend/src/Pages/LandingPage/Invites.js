@@ -38,7 +38,13 @@ const Invites = () => {
     }
 
     const handleAccept = async (Orgid , Inviteid) =>{
-    
+        
+        const index = invite.findIndex(obj => obj._id === Inviteid);
+        let tempinvites = invite;
+        if (index !== -1) {
+            tempinvites = invite.splice(index, 1);
+        }
+        setInvite(tempinvites);
         
 
         let temp = await fetch(`organisation/${Orgid}`);
@@ -78,12 +84,7 @@ const Invites = () => {
         a.orgs = [...orgs, newOrgtoPush];
         localStorage.user = JSON.stringify(a);
 
-        const index = invite.findIndex(obj => obj._id === Inviteid);
-        let tempinvites = invite;
-        if (index !== -1) {
-            tempinvites = invite.splice(index, 1);
-        }
-        setInvite(tempinvites);
+        
 
         await fetch(`user/${JSON.parse(localStorage.getItem('user'))._id}`, {
             method: 'PATCH',

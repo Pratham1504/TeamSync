@@ -11,13 +11,10 @@ const NavBar = () => {
     const user = JSON.parse(localStorage.getItem('user'))
 
     useEffect(() => {
-        const getOrg = async () => {
-            const orgg = JSON.parse(localStorage.getItem('user')).openOrg;
-            // const orggg = await orgg.json()
-            setOrgOpen(orgg);
-        }
-        getOrg();
-    }, [user])
+        const orgg = JSON.parse(localStorage.getItem('user')).openOrg;
+        setOrgOpen(orgg);
+    }, [])
+    
     const clickHandler = () => {
         logout()
     }

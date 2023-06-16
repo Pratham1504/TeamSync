@@ -15,11 +15,10 @@ const Organisation = () => {
 
 
     useEffect(() => {
-        const fetchdata = async () => {
-            const org = JSON.parse(localStorage.getItem('user')).orgs
-            setorgs(org);
-        }
-        fetchdata();
+
+        const org = JSON.parse(localStorage.getItem('user')).orgs
+        setorgs(org);
+
     }, [orgs]);
 
 
@@ -99,10 +98,10 @@ const Organisation = () => {
         let members = tempOrg.members;
 
         let newMemberAcceptObj = {
-            name:JSON.parse(localStorage.getItem('user')).name,
-            email:JSON.parse(localStorage.getItem('user')).email,
-            image:JSON.parse(localStorage.getItem('user')).image,
-            _id:JSON.parse(localStorage.getItem('user'))._id
+            name: JSON.parse(localStorage.getItem('user')).name,
+            email: JSON.parse(localStorage.getItem('user')).email,
+            image: JSON.parse(localStorage.getItem('user')).image,
+            _id: JSON.parse(localStorage.getItem('user'))._id
         }
 
         await fetch(`organisation/${temporg._id}`, {
@@ -134,7 +133,7 @@ const Organisation = () => {
 
                 <div className="orgss" style={{ display: "flex", overflowX: "auto" }}>
 
-                    <div className="org-details" data-bs-toggle="modal" data-bs-target="#Create-Board" onClick={() => { }} style={{ fontSize: "150%", display: "flex", justifyContent: "center", alignItems: "center", backgroundColor: "#f1f1f1" }}>
+                    <div className="org-details" data-bs-toggle="modal" data-bs-target="#Create-Board" style={{ fontSize: "150%", display: "flex", justifyContent: "center", alignItems: "center", backgroundColor: "#f1f1f1" }}>
                         <IoIosAddCircleOutline /> <p>Add Organisation</p>
                     </div>
 
@@ -169,7 +168,7 @@ const Organisation = () => {
                     </div>
                     {orgs && orgs.map((organisation) => (
                         <div className="org-details" onClick={updateuser.bind(this, organisation)}>
-                            <Link to={`/home`} style={{ fontStyle: "none", marginLeft: "3%",textDecoration:"none" }} >
+                            <Link to={`/home`} style={{ fontStyle: "none", marginLeft: "3%", textDecoration: "none" }} >
                                 <div style={{ display: "flex", alignItems: "center", justifyContent: "flex-start" }}>
                                     <img src={organisation.image} style={{ height: "7vh", width: "5vh" }} alt="" />
                                     <h4>{organisation.name}</h4>

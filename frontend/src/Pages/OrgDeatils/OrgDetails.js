@@ -1,19 +1,10 @@
 import { useEffect, useState } from "react"
-// import useAuthContext from '../../hooks/useAuthContext';
 import NavBar from "../navBar";
 import './OrgDetails.css';
 import { IoIosAddCircleOutline } from 'react-icons/io';
 
-// import { FiMoreVertical } from 'react-icons/fi';
-// import MemberCard from "./MemberCard";
-// import Member from '../../components/Member';
-// const mongoose=require('mongoose') 
-
 const User = () => {
     const [members, setMembers] = useState();
-    // const [owner, setowner] = useState(null);
-    // const { user } = useAuthContext();
-    const [newMemberId, setNewMemberId] = useState("");
     const [newMemberEmail, setNewMemberEmail] = useState("");
 
     useEffect(() => {
@@ -33,8 +24,8 @@ const User = () => {
 
         let temp = await fetch('user/');
         let tempUser = await temp.json();
-        const filteredUser = tempUser.filter(person => person.email === newMemberEmail);
-        setNewMemberId(filteredUser[0]._id);
+        const filteredUser = await tempUser.filter(person => person.email === newMemberEmail);
+        // console.log(filteredUser[0]._id);      
 
         await fetch('userInvites/', {
             method: 'POST',
@@ -42,7 +33,7 @@ const User = () => {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                invitee: newMemberId,
+                invitee: filteredUser[0]._id,
                 email: newMemberEmail,
                 invitedBy: JSON.parse(localStorage.getItem('user'))._id,
                 org: JSON.parse(localStorage.getItem('user')).openOrg.openOrgId,
@@ -56,8 +47,7 @@ const User = () => {
             .catch(error => {
                 console.error('Error:', error);
             });
-        
-        // console.log(newInviteId , " Hey");        
+               
         const user = JSON.parse(localStorage.getItem('user'));
         const sentInvites = user.sentInvites;
         
@@ -72,7 +62,7 @@ const User = () => {
 
 
 
-        let newMember = await fetch(`user/${newMemberId}`);
+        let newMember = await fetch(`user/${filteredUser[0]._id}`);
         let newMemberObj = await newMember.json();
         let newMemberInvites = newMemberObj.invites;
         let newMemberInviteUpdateObj = {
@@ -82,10 +72,9 @@ const User = () => {
             InviteId:newInviteId
         }
 
-        // console.log(newMemberInviteUpdateObj," hjfka");
         
 
-        await fetch(`user/${newMemberId}` , {
+        await fetch(`user/${filteredUser[0]._id}` , {
             method: 'PATCH',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ "invites": [...newMemberInvites, newMemberInviteUpdateObj] })
@@ -94,31 +83,10 @@ const User = () => {
 
         
 
-        setNewMemberId("");
         setNewMemberEmail("");
 
     }
 
-    // useEffect(() => {
-    //     const getowner = async () => {
-    //         const ownerr = await fetch(`user/${org.createdBy}`)
-    //         const ownerrr = await ownerr.json();
-    //         setowner(ownerrr)
-    //     }
-    //     getowner();
-    // }, [org]);
-    // console.log(owner)
-
-    // const projects = [
-    //     {
-    //         id: 1,
-    //         name: 'projName',
-    //         description: 'hello',
-    //         updatedAt: '8 hours',
-    //         boards: ['abcd123', 'dcba321']
-
-    //     },
-    // ]
     return (
         <>
             <NavBar />
@@ -154,7 +122,7 @@ const User = () => {
                                     <div class="mb-3 row">
                                         <label for="inputDescription" class="col-sm-12 col-form-label">Email of User:</label>
                                         <div class="col">
-                                            <input type="text" class="form-control" id="inputdescription" onChange={e => setNewMemberEmail(e.target.value)} />
+                                            <input type="text" class="form-control" id="inputdescription" value={newMemberEmail} onChange={e => setNewMemberEmail(e.target.value)} />
                                         </div>
                                     </div>
                                 </div>

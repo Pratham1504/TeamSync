@@ -11,12 +11,16 @@ const NavBar = () => {
     const user = JSON.parse(localStorage.getItem('user'))
 
     useEffect(() => {
-        const orgg = JSON.parse(localStorage.getItem('user')).openOrg;
-        setOrgOpen(orgg);
+        const getOrg = async () => {
+            const orgg = JSON.parse(localStorage.getItem('user')).openOrg;
+            // const orggg = await orgg.json()
+            setOrgOpen(orgg);
+        }
+        getOrg();
     }, [])
-    
-    const clickHandler = () => {
+    const clickHandler = async () => {
         logout()
+        window.location.reload()
     }
 
 
@@ -36,20 +40,20 @@ const NavBar = () => {
 
         document.location.reload()
 
-        const userr = await fetch(`/user/${user._id}`, {
-            method: 'PATCH',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                "openOrg": {
-                    "openOrgId": null,
-                    "openOrgName": null
-                },
-                "openProject":{
-                    "openProjectId": null,
-                    "openProjectName": null
-                }
-            })
-        })
+        // const userr = await fetch(`/user/${user._id}`, {
+        //     method: 'PATCH',
+        //     headers: { 'Content-Type': 'application/json' },
+        //     body: JSON.stringify({
+        //         "openOrg": {
+        //             "openOrgId": null,
+        //             "openOrgName": null
+        //         },
+        //         "openProject":{
+        //             "openProjectId": null,
+        //             "openProjectName": null
+        //         }
+        //     })
+        // })
 
 
     }
@@ -60,7 +64,7 @@ const NavBar = () => {
                 <nav class="navbar navbar-expand-lg bg-body-tertiary">
                     <div class="container-fluid">
                         <img src="https://www.clipartmax.com/png/small/413-4139811_transparent-background-cool-logo.png" alt="Transparent Background Cool Logo @clipartmax.com" style={{ height: "5vh", marginLeft: "0", paddingLeft: '0', }} />
-                        <Link to="/" className="Pname nav-link active" style={{ textDecoration: "none", color: "black", fontSize: "150%", fontWeight: "bold", marginRight: "2%", marginLeft: "1%" }} onClick={orgout}>Project2023</Link>
+                        <Link to="/" className="Pname nav-link active" style={{ textDecoration: "none", color: "black", fontSize: "150%", fontWeight: "bold", marginRight: "2%", marginLeft: "1%" }} onClick={orgout}>TeamSync</Link>
                         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-icon"></span>
                         </button>
@@ -69,7 +73,7 @@ const NavBar = () => {
                                 <Link to='/home' className='nav-link' style={{ textDecoration: "none" }}>Home</Link>
                             </li>
                             <li class="nav-item" style={{ display: "flex", alignItems: "center" }}>
-                                <Link to='/board' className='nav-link' style={{ textDecoration: "none" }}>My tasks</Link>
+                                <Link to='/mytask' className='nav-link' style={{ textDecoration: "none" }}>My tasks</Link>
                             </li>
                             <li class="nav-item" style={{ display: "flex", alignItems: "center" }}>
                                 <Link to='/projects' className='nav-link' style={{ textDecoration: "none" }}>Projects</Link>

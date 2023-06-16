@@ -14,7 +14,7 @@ import ProfilePage from './Pages/profile/profilePage';
 import useAuthContext from './hooks/useAuthContext';
 import { AuthContext } from './context/authContext';
 import BoardsInProject from './Pages/BoardsInProjectPage/BoardsInProject';
-
+import Mytask from './Pages/MyTask/Mytask'
 
 
 const App= ()=> {
@@ -42,6 +42,10 @@ console.log(user)
                 <Route
                     exact path='/task'
                     element={user ? user.openOrg.openOrgId?user.openProject.openProjectId?<BoardsInProject/>:<Project/>:<Navigate to="/"/>: <Navigate to='/login'/>}
+                /> 
+                <Route
+                    exact path='/mytask'
+                    element={user ? user.openOrg.openOrgId?<Mytask/>:<Navigate to="/"/>: <Navigate to='/login'/>}
                 />
                 <Route
                     exact path='/board'

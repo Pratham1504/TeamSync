@@ -4,16 +4,16 @@ import formatDistanceToNow from 'date-fns/formatDistanceToNow';
 const Members=()=>{
     const [invite,setinvite]=useState(null);
 
-useEffect(()=>{
-const fetchdata=async ()=>{
-  const allinvite=await fetch('');
-  allinvite=await allinvite.json();
-  if(allinvite.ok){
-    setinvite(allinvite);
-  }
-}
-fetchdata();
-},[])
+// useEffect(()=>{
+// const fetchdata=async ()=>{
+//   const allinvite=await fetch('');
+//   allinvite=await allinvite.json();
+//   if(allinvite.ok){
+//     setinvite(allinvite);
+//   }
+// }
+// fetchdata();
+// },[])
 return(
     <>
     <div>

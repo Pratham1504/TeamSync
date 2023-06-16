@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import formatDistanceToNow from 'date-fns/formatDistanceToNow';
+// import formatDistanceToNow from 'date-fns/formatDistanceToNow';
 import { FiMoreVertical } from 'react-icons/fi';
 import { IoIosAddCircleOutline } from 'react-icons/io'
 import { Link } from "react-router-dom";
-import BoardsInProject from '../BoardsInProjectPage/BoardsInProject';
+// import BoardsInProject from '../BoardsInProjectPage/BoardsInProject';
 // import { useGlobalBoardContext } from "../../context/boardContext";
 // import useOrgin from "../../hooks/useOrgin";
 
@@ -181,7 +181,7 @@ const Projects = () => {
                                 <div style={{ display: "flex", alignItems: "center", justifyContent: "flex-start" }}>
                                     <h4>{project.name}</h4>
                                 </div>
-                                <p><strong>Creator: </strong>{project.description}</p>
+                                <p style={{overflow:"hidden "}}><strong>Creator: </strong>{project.description}</p>
                                 {/* <p>{formatDistanceToNow(new Date(project.createdAt), { addSuffix: true })}</p> */}
                                 <span className="material-symbols-outlined" onClick={() => { }}><FiMoreVertical /></span>
                             </Link>

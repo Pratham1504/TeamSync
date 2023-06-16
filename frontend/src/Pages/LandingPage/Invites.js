@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import formatDistanceToNow from 'date-fns/formatDistanceToNow';
+// import formatDistanceToNow from 'date-fns/formatDistanceToNow';
 
 const Invites = () => {
     const [invite, setInvite] = useState([]);
@@ -18,7 +18,7 @@ const Invites = () => {
         fetchdata();
 
 
-    }, [invite])
+    }, [])
 
     const handleDelete = async (Orgid , Inviteid) => {
         const index = invite.findIndex(obj => obj._id === Inviteid);

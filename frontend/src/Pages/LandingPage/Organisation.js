@@ -12,14 +12,38 @@ const Organisation = () => {
     const [newOrgName, setNewOrgName] = useState("");
     const [newOrgImage, setNewOrgImage] = useState("");
     
+    const [id,setId] = useState(null);
 
-    // useEffect(() => {
-    //     const fetchdata = async () => {
-    //         const org = JSON.parse(localStorage.getItem('user')).orgs
-    //         setorgs(org);
-    //     }
-    //     fetchdata();
-    // }, [orgs]);
+    const handleDelete = async (e) => {
+        const respose = await fetch(`organisation/${id}`, {
+            method: 'DELETE',
+            headers: { 'Content-Type': 'application/json' }
+        })
+        await fetch(`user/${JSON.parse(localStorage.getItem('user'))._id}`, {
+            method: 'DELETE',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({"orgId": `${id}`})
+        })
+        const a = JSON.parse(localStorage.user)
+        await a.orgs.splice(id,1)
+        localStorage.user = JSON.stringify(a)
+        window.location.reload()
+    }
+
+    const handleEdit = async () => {
+        const respose = await fetch(`organisation/${id}`, {
+            method: 'PATCH',
+            headers: { 'Content-Type': 'application/json' }
+        })
+    }
+
+    useEffect(() => {
+        const fetchdata = async () => {
+            const org = JSON.parse(localStorage.getItem('user')).orgs
+            setorgs(org);
+        }
+        fetchdata();
+    }, []);
 
 
 
@@ -113,8 +137,6 @@ const Organisation = () => {
         const a = JSON.parse(localStorage.user)
         a.orgs = [...orgs, temporg];
         localStorage.user = JSON.stringify(a);
-        // console.log(a)
-        // window.location.reload()
 
         setNewOrgName("");
         setNewOrgImage("");
@@ -167,24 +189,24 @@ const Organisation = () => {
                         </div>
                     </div>
                     {orgs && orgs.map((organisation) => (
-                        <div className="org-details" onClick={updateuser.bind(this, organisation)}>
-                            <Link to={`/home`} style={{ fontStyle: "none", marginLeft: "3%",textDecoration:"none" }} >
+                        <div className="org-details"   >
+                            <Link to={`/home`} style={{ fontStyle: "none", marginLeft: "3%",textDecoration:"none" }} onClick={updateuser.bind(this, organisation)} >
                                 <div style={{ display: "flex", alignItems: "center", justifyContent: "flex-start" }}>
                                     <img src={organisation.image} style={{ height: "7vh", width: "5vh" }} alt="" />
                                     <h4>{organisation.name}</h4>
                                 </div>
                                 <p><strong>Creator: </strong>{organisation.createdBy}</p>
                                 {/* <p>{formatDistanceToNow(new Date(organisation.createdAt), { addSuffix: true })}</p> */}
+                            </Link>
                                 <span className="material-symbols-outlined" onClick={() => { }}>
                                     <div class="dropdown">
-                                        <button class="dropbtn"><FiMoreVertical /></button>
+                                        <button class="dropbtn" onMouseEnter={()=>{setId(organisation._id)}} onMouseLeave={()=>{setId(null)}} ><FiMoreVertical /></button>
                                         <div class="dropdown-content">
-                                            <button class="btn btn-dark" onClick={() => { }}>Edit</button>
-                                            <a href="/profile">Delete</a>
+                                            <button class="btn btn-dark" onClick={handleEdit}>Edit</button>
+                                            <button class="btn btn-dark" onClick={handleDelete}>Delete</button>
                                         </div>
                                     </div>
                                 </span>
-                            </Link>
                         </div>
                     ))}
 

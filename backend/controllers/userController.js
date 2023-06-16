@@ -1,6 +1,7 @@
 const User = require('../models/user')
 const {createToken} = require('../middleware/createToken')
 const mongoose = require('mongoose');
+const { findById } = require('../models/organisation');
 
 //login user
 const loginUser = async (req,res) =>{
@@ -56,6 +57,16 @@ const userupdate=async(req,res)=>{
   res.json(user)
 }
 
+const deleteOrg = async (req,res) => {
+    console.log("hello")
+    const {id} = req.params
+    const user = await User.findOne({_id:id})
+    res.status(200).json(user)
+    console.log(req.body)
+    user.orgs.splice(req.body.orgId,1)
+    user.save()
+}
+
 const finduser=async(req,res)=>{
     const {id}=req.params;
     if(!mongoose.Types.ObjectId.isValid(id)){
@@ -69,4 +80,4 @@ const finduser=async(req,res)=>{
       }
      res.json(user)
 }
-module.exports = {loginUser,signupUser,userupdate,finduser,getAllUsers}
+module.exports = {loginUser,signupUser,userupdate,finduser,getAllUsers,deleteOrg}

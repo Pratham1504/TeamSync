@@ -61,7 +61,7 @@ const organisationDelete = async (req, res) => {
         return res.status(404).json({ error: 'No such project' })
     }
 
-    const org = Organisation.findOneAndDelete({ _id: id });
+    const org = await Organisation.findOneAndDelete({ _id: id });
     if (!org) {
         return res.status(204).json({ error: "NO SUCH ORGANISATION" });
     }

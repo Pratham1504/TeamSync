@@ -10,16 +10,17 @@ const NavBar = () => {
     const { logout } = useLogout()
     const user = JSON.parse(localStorage.getItem('user'))
 
-    // useEffect(() => {
-    //     const getOrg = async () => {
-    //         const orgg = JSON.parse(localStorage.getItem('user')).openOrg;
-    //         // const orggg = await orgg.json()
-    //         setOrgOpen(orgg);
-    //     }
-    //     getOrg();
-    // }, [user])
-    const clickHandler = () => {
+    useEffect(() => {
+        const getOrg = async () => {
+            const orgg = JSON.parse(localStorage.getItem('user')).openOrg;
+            // const orggg = await orgg.json()
+            setOrgOpen(orgg);
+        }
+        getOrg();
+    }, [])
+    const clickHandler = async () => {
         logout()
+        window.location.reload()
     }
 
 
@@ -72,7 +73,7 @@ const NavBar = () => {
                                 <Link to='/home' className='nav-link' style={{ textDecoration: "none" }}>Home</Link>
                             </li>
                             <li class="nav-item" style={{ display: "flex", alignItems: "center" }}>
-                                <Link to='/board' className='nav-link' style={{ textDecoration: "none" }}>My tasks</Link>
+                                <Link to='/mytask' className='nav-link' style={{ textDecoration: "none" }}>My tasks</Link>
                             </li>
                             <li class="nav-item" style={{ display: "flex", alignItems: "center" }}>
                                 <Link to='/projects' className='nav-link' style={{ textDecoration: "none" }}>Projects</Link>

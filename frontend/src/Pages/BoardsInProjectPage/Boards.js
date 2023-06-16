@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import formatDistanceToNow from 'date-fns/formatDistanceToNow';
 import { FiMoreVertical } from 'react-icons/fi';
 import { IoIosAddCircleOutline } from 'react-icons/io'
+import { Link } from "react-router-dom";
 // import { Link } from "react-router-dom";
 // import { useGlobalBoardContext } from "../../context/boardContext";
 // import useOrgin from "../../hooks/useOrgin";
@@ -104,12 +105,14 @@ const Boards = () => {
                     </div>
                     {Boards && Boards.map((board) => (
                         <div className="board-details" style={{ width: "28%" }}>
-                            <div style={{ display: "flex", alignItems: "center", justifyContent: "flex-start" }}>
-                                <h4>{board.name}</h4>
-                            </div>
-                            <p><strong>Creator: </strong>{board.description}</p>
-                            <p>{formatDistanceToNow(new Date(board.createdAt), { addSuffix: true })}</p>
-                            <span className="material-symbols-outlined"><FiMoreVertical /></span>
+                            <Link style={{ textDecoration: "none" }} to="/board" >
+                                <div style={{ display: "flex", alignItems: "center", justifyContent: "flex-start" }}>
+                                    <h4>{board.name}</h4>
+                                </div>
+                                <p><strong>Creator: </strong>{board.description}</p>
+                                <p>{formatDistanceToNow(new Date(board.createdAt), { addSuffix: true })}</p>
+                                <span className="material-symbols-outlined"><FiMoreVertical /></span>
+                            </Link>
                         </div>
                     ))}
                 </div>

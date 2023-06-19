@@ -32,7 +32,11 @@ const Task = () => {
     const [tassk, uptassk] = useState(new Map());
 
     const [tasks, collecttasks] = useState([]);
-    var word = [];
+    const [taskname,tname]=useState("");
+    const [taskdes,tdes]=useState("");
+    const [taskprio,tprio]=useState("");
+    const [taskcat,tcat]=useState("");
+
     var taskk;
     useEffect(() => {
 
@@ -63,7 +67,23 @@ const Task = () => {
         uptassk(tassk);
         console.log(Object.keys(tassk));
     }, [tasks])
-    const post = async () => {
+    
+    const addTask=async ()=>{
+        console.log(taskcat);
+        const task=await fetch('/tasks/',{
+            method:"POST",
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                "title":taskname,
+                "description":taskdes,
+                // "priority":taskprio,
+                "category":taskcat
+            })
+            
+        })
+        // const taskkk=await task.json();
+        // console.log();
+       
     }
 
     if (tassk.size) {
@@ -81,7 +101,7 @@ const Task = () => {
                                     <div style={{ width: "6%", backgroundColor: "blue", marginRight: "8px", borderRadius: "20%" }}>.</div>
                                     <h4 className="label">{key}</h4>
                                 </div>
-                                <button data-bs-toggle="modal" data-bs-target="#Task-add" onClick={post} style={{ fontSize: "150%" }}><IoIosAddCircleOutline /></button>
+                                <button data-bs-toggle="modal" data-bs-target="#Task-add" onClick={()=>{}} style={{ fontSize: "150%" }}><IoIosAddCircleOutline /></button>
                             </div>
                             <div className="modal fade" id="Task-add" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" style={{}}>
                                 <div className="modal-dialog">
@@ -94,22 +114,22 @@ const Task = () => {
                                             <div class="mb-3 row">
                                                 <label for="inputName" class="col-sm-12 col-form-label">Task:</label>
                                                 <div class="col">
-                                                    <input type="text" readonly class="form-control-plaintext" id="inputName" onChange={() => { }} />
+                                                    <input type="text" readonly class="form-control-plaintext" id="inputName" onChange={(e) => {tname(e.target.value) }} />
                                                 </div>
                                             </div>
                                             <div class="mb-3 row">
                                                 <label for="inputDescription" class="col-sm-12 col-form-label">Description of Task</label>
                                                 <div class="col">
-                                                    <input type="text" class="form-control" id="inputdescription" onChange={() => { }} />
+                                                    <input type="text" class="form-control" id="inputdescription" onChange={(e) => {tdes(e.target.value); }} />
                                                 </div>
                                             </div>
                                             <div style={{ display: "flex", justifyContent: "space-between" }}>
                                                 <p class="label">Priority:</p>
                                                 <div class="priority">
                                                     <select>
-                                                        <option>High</option>
-                                                        <option>Medium</option>
-                                                        <option>Low</option>
+                                                        <option onClick={()=>tprio("High")}>High</option>
+                                                        <option onClick={()=>tprio("Medium")} >Medium</option>
+                                                        <option onClick={()=>tprio("Low")}>Low</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -126,19 +146,20 @@ const Task = () => {
                                             </div>
                                             <div style={{ alignItems: "center" }}>
                                                 <label for="category">Select or Enter a Category:</label>
-                                                <select id="category" name="category">
+                                                <select id="category" name="category" onChange={(e)=>tcat(e.target.value)}>
                                                     <option value="" selected disabled hidden>Choose an option</option>
-                                                    <option value="option1">Option 1</option>
-                                                    <option value="option2">Option 2</option>
-                                                    <option value="option3">Option 3</option>
-                                                    <option value="new">Enter a new category</option>
-
+                                                    <option value="brainStorm" >brainStorm</option>
+                                                    <option value="done" >done</option>
+                                                    <option value="toDo">toDo</option>
+                                                    <option value="deployed">deployed</option>
+                                                    <option value="inprogress" >inProgress</option>
+                                                    <option value="backLog">toDo</option>
+                                                    <option value="onHold">deployed</option>
                                                 </select>
-                                                <input type="text" id="new-category" name="new-category" placeholder="Enter a new category" />
                                             </div>
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onClick={() => { }}>Add Task</button>
+                                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onClick={addTask}>Add Task</button>
 
 
                                         </div>

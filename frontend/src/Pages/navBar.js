@@ -4,7 +4,7 @@ import useLogout from '../hooks/useLogout'
 import './navbar.css'
 import 'bootstrap/dist/css/bootstrap.css';
 import { useState, useEffect } from 'react';
-
+import Avatar from 'react-avatar';
 const NavBar = () => {
     const [orgOpen, setOrgOpen] = useState(null)
     const { logout } = useLogout()
@@ -88,7 +88,9 @@ const NavBar = () => {
                             </div>
                         }
                         <div style={{ display: "flex", alignItems: "center", marginRight: "2%" }}>
-                            <CgProfile style={{ fontSize: "150%", margin: "4px" }} />
+                            {/* <CgProfile style={{ fontSize: "150%", margin: "4px" }} /> */}
+                                {user.image && <img className="navDp" src={user.image} alt="User Avatar" style={{height:"35px",width:"35px",objectFit:"scale-down"}}/>}
+                                {!user.image &&<Avatar name={user.name} size="35" round={true} textSizeRatio={1.7} style={{marginRight:"3px"}}></Avatar>}
                             <Link to='/profile' style={{ fontSize: "80%", marginBottom: "0", textDecoration: "none" }}>{user.name}</Link>
                         </div>
                         <button class="btn btn-secondary btn-sm" onClick={clickHandler} style={{ marginRight: "2%" }}>Log out</button>

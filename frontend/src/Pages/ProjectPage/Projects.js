@@ -144,7 +144,7 @@ const Projects = () => {
                     <div style={{ width: "0.7%", backgroundColor: "blue", marginRight: "8px", borderRadius: "20%" }}>.</div>
                     <h3>Projects</h3>
                 </div>
-                <div style={{ display: "flex", flexWrap: "wrap" }}>
+                <div style={{ display: "flex", overflowX: "auto" }}>
                     <div className="board-details" data-bs-toggle="modal" data-bs-target="#Create-Board" onClick={() => { }} style={{ width: "28%", fontSize: "150%", display: "flex", justifyContent: "center", alignItems: "center", backgroundColor: "#f1f1f1" }}>
                         <IoIosAddCircleOutline /> <p>New Project</p>
                     </div>

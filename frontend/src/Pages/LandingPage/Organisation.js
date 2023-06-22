@@ -110,7 +110,7 @@ const Organisation = () => {
                 console.log(error);
             });
 
-        await fetch(`user/${JSON.parse(localStorage.getItem('user'))._id}`, {
+        fetch(`user/${JSON.parse(localStorage.getItem('user'))._id}`, {
             method: 'PATCH',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ "orgs": [...orgs, temporg] })
@@ -127,7 +127,7 @@ const Organisation = () => {
             _id: JSON.parse(localStorage.getItem('user'))._id
         }
 
-        await fetch(`organisation/${temporg._id}`, {
+        fetch(`organisation/${temporg._id}`, {
             method: 'PATCH',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ "members": [...members, newMemberAcceptObj] })

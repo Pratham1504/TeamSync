@@ -74,7 +74,7 @@ const Projects = () => {
             });
 
 
-        await fetch(`organisation/${JSON.parse(localStorage.getItem('user')).openOrg.openOrgId}`, {
+        fetch(`organisation/${JSON.parse(localStorage.getItem('user')).openOrg.openOrgId}`, {
             method: 'PATCH',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ "projects": [...Projects, tempProject] })
@@ -82,7 +82,7 @@ const Projects = () => {
 
         // console.log(Projects);
 
-        await fetch(`user/${JSON.parse(localStorage.getItem('user'))._id}`, {
+        fetch(`user/${JSON.parse(localStorage.getItem('user'))._id}`, {
             method: 'PATCH',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ "projects": [...pr, tempProject._id] })

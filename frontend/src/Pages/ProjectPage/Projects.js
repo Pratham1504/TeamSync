@@ -177,7 +177,7 @@ const Projects = () => {
                     </div>
                     {Projects && Projects.map((project) => (
                         <div className="board-details" style={{ width: "28%" }} onClick={updateuser.bind(this, project)} >
-                            <Link style={{ textDecoration: "none" }} to="/task" >
+                            <Link style={{ textDecoration: "none" }} to="/board" >
                                 <div style={{ display: "flex", alignItems: "center", justifyContent: "flex-start" }}>
                                     <h4>{project.name}</h4>
                                 </div>

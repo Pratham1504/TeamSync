@@ -26,15 +26,23 @@ const getProject = async (req,res) =>{
 
 // Create new project
 const createProject = async (req,res) => {
-    if(req.body.length > 0){
-        return res.status(400).json({error: ' Please Fill in all the Fields',emptyFields})
+    try {
+        const id = req.body.createdBy
+        console.log(req.body)
+        const user = await UserSchema.findOne({_id:id})
+        const creatorName = user.name
+        const body = {
+            "name":`${req.body.name}`,
+            "description":`${req.body.description}`,
+            "createdById":`${id}`,
+            "createdByName":`${creatorName}`,
+            "orgId":`${req.body.orgId}`
+        }
+        const org = await Project.create(body);
+        res.status(200).json(org);
     }
-    // add doc to db
-    try{
-        const project = await Project.create(req.body)     
-        res.status(200).json(project)
-    }catch(err){
-        res.status(400).json({error:err.message})
+    catch (error) {
+        res.status(201).json({ error: error.message });
     }
 }
 

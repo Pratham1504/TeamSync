@@ -40,7 +40,7 @@ console.log(user)
                     element={user ? <Navigate to ='/'/> : <SignUp/>}
                 />
                 <Route
-                    exact path='/task'
+                    exact path='/board'
                     element={user ? user.openOrg.openOrgId?user.openProject.openProjectId?<BoardsInProject/>:<Project/>:<Navigate to="/"/>: <Navigate to='/login'/>}
                 /> 
                 <Route
@@ -48,8 +48,8 @@ console.log(user)
                     element={user ? user.openOrg.openOrgId?<Mytask/>:<Navigate to="/"/>: <Navigate to='/login'/>}
                 />
                 <Route
-                    exact path='/board'
-                    element={user ? user.openOrg.openOrgId?<Board/>:<Navigate to="/"/>: <Navigate to='/login'/>}
+                    exact path='/task'
+                    element={user ? user.openOrg.openOrgId?user.openProject.openProjectId?<Board/>:<BoardsInProject/>:<Navigate to="/"/>: <Navigate to='/login'/>}
                 />
                 <Route
                     exact path='/projects'

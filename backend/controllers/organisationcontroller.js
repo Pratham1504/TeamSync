@@ -45,10 +45,17 @@ const organisationPut = async (req, res) => {
 const organisationPost = async (req, res) => {
 
     try {
-        const org = await Organisation.create(req.body);
+        const id = req.body.createdBy
+        const user = await UserSchema.findOne({_id:id})
+        const creatorName = user.name
+        const body = {
+            "name":`${req.body.name}`,
+            "image":`${req.body.image}`,
+            "createdById":`${id}`,
+            "createdByName":`${creatorName}`
+        }
+        const org = await Organisation.create(body);
         res.status(200).json(org);
-        // console.log("d");
-        
     }
     catch (error) {
         res.status(201).json({ error: error.message });

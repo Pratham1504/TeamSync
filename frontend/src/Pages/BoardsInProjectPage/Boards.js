@@ -2,14 +2,14 @@ import React, { useEffect, useState } from "react";
 import formatDistanceToNow from 'date-fns/formatDistanceToNow';
 import { FiMoreVertical } from 'react-icons/fi';
 import { IoIosAddCircleOutline } from 'react-icons/io'
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 // import { useGlobalBoardContext } from "../../context/boardContext";
 // import useOrgin from "../../hooks/useOrgin";
 
 
 const Boards = () => {
     const [Boards, setBoards] = useState([]);
-    // const [newprojectId, setNewProjectId] = useState("");
+    // const [newboardId, setNewProjectId] = useState("");
     const [newBoardName, setNewBoardName] = useState("");
     const [newBoardDescription, setNewBoardDescription] = useState("");
 
@@ -62,6 +62,41 @@ const Boards = () => {
 
     }
 
+    async function updateuser(board) {
+
+
+        const a = JSON.parse(localStorage.user)
+        // a.openOrg = organisation._id;
+        a.openBoard = {
+            openBoardId: board._id,
+            openBoardName: board.name
+        }
+        localStorage.user = JSON.stringify(a);
+        // console.log(a)
+        window.location.reload()
+
+        await fetch(`user/${JSON.parse(localStorage.getItem('user'))._id}`, {
+            method: 'PATCH',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                "openBoard": {
+                    "openBoardId": board._id,
+                    "openBoardName": board.name
+                }
+            })
+        })
+            .then(response => response.json())
+            .then(async (result) => {
+                console.log("Success!");
+            })
+            .catch(error => {
+                console.log(error);
+            });
+
+        // console.log("Here");
+
+
+    }
 
 
     return (
@@ -103,13 +138,15 @@ const Boards = () => {
                         </div>
                     </div>
                     {Boards && Boards.map((board) => (
-                        <div className="board-details" style={{ width: "28%" }}>
+                        <div className="board-details" style={{ width: "28%" }} onClick={updateuser.bind(this, board)}>
+                            <Link style={{ textDecoration: "none" }} to="/task" >
                             <div style={{ display: "flex", alignItems: "center", justifyContent: "flex-start" }}>
                                 <h4>{board.name}</h4>
                             </div>
                             <p><strong>Creator: </strong>{board.description}</p>
                             <p>{formatDistanceToNow(new Date(board.createdAt), { addSuffix: true })}</p>
                             <span className="material-symbols-outlined"><FiMoreVertical /></span>
+                            </Link>
                         </div>
                     ))}
                 </div>

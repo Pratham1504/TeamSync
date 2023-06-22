@@ -56,6 +56,12 @@ const user = new schema({
             type: mongoose.Schema.Types.ObjectId, ref: `project`,
         }
     ],
+    
+    boards: [
+        {
+            type: mongoose.Schema.Types.ObjectId, ref: `board`,
+        }
+    ],
     sentInvites: [
         {
             type: mongoose.Schema.Types.ObjectId, ref: `userInvite`,
@@ -76,8 +82,11 @@ const user = new schema({
     openProject: {
         openProjectId: { type: mongoose.Schema.Types.ObjectId, ref: `project`, default: null },
         openProjectName: { type: String, default: null }
+    },
+    openBoard: {
+        openBoardId: { type: mongoose.Schema.Types.ObjectId, ref: `board`, default: null },
+        openBoardName: { type: String, default: null }
     }
-
 })
 
 // static signup method

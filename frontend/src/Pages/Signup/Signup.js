@@ -41,7 +41,7 @@ const SignUp = () => {
             renderer: 'svg',
             loop: true,
             autoplay: true,
-            path: 'https://assets4.lottiefiles.com/packages/lf20_CgL682.json'
+            path: 'https://assets3.lottiefiles.com/private_files/lf30_rruzda2a.json'
         });
     }
     

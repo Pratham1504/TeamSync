@@ -25,7 +25,7 @@ const task = new schema({
 
     assignees:[
         {
-            required:true,
+            // required:true,
             type:mongoose.Schema.Types.ObjectId, ref: `user`,
         }
     ],
@@ -41,9 +41,9 @@ const task = new schema({
     },
 
     priority:{
-        required : true,
+        // required : true,
         type: String,
-        enum:["lowest","low","medium","high","highest"]
+        // enum:["lowest","Low","Medium","High","highest"]
     },
 
     category:{

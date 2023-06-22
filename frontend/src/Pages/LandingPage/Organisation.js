@@ -1,13 +1,10 @@
 import React, { useEffect, useState } from "react";
-// import formatDistanceToNow from 'date-fns/formatDistanceToNow';
 import { FiMoreVertical } from 'react-icons/fi';
 import { IoIosAddCircleOutline } from 'react-icons/io'
 import {  Link } from "react-router-dom";
-// import useAuthContext from '../../hooks/useAuthContext';
 
 
 const Organisation = () => {
-    // const {user} =  useAuthContext()
     const [orgs, setorgs] = useState();
     const [newOrgName, setNewOrgName] = useState("");
     const [newOrgImage, setNewOrgImage] = useState("");
@@ -15,7 +12,7 @@ const Organisation = () => {
     const [id,setId] = useState(null);
 
     const handleDelete = async (e) => {
-        const respose = await fetch(`organisation/${id}`, {
+        await fetch(`organisation/${id}`, {
             method: 'DELETE',
             headers: { 'Content-Type': 'application/json' }
         })
@@ -27,11 +24,11 @@ const Organisation = () => {
         const a = JSON.parse(localStorage.user)
         await a.orgs.splice(id,1)
         localStorage.user = JSON.stringify(a)
-        window.location.reload()
+        document.location.reload()
     }
 
     const handleEdit = async () => {
-        const respose = await fetch(`organisation/${id}`, {
+        await fetch(`organisation/${id}`, {
             method: 'PATCH',
             headers: { 'Content-Type': 'application/json' }
         })
@@ -50,13 +47,11 @@ const Organisation = () => {
 
 
         const a = JSON.parse(localStorage.user)
-        // a.openOrg = organisation._id;
         a.openOrg = {
             openOrgId: organisation._id,
             openOrgName: organisation.name
         }
         localStorage.user = JSON.stringify(a);
-        // console.log(a)
         window.location.reload()
 
         await fetch(`user/${JSON.parse(localStorage.getItem('user'))._id}`, {
@@ -76,15 +71,10 @@ const Organisation = () => {
             .catch(error => {
                 console.log(error);
             });
-
-        // console.log("Here");
-
-
     }
 
     const addOrg = async () => {
-        let temporg;
-        await fetch('organisation/', {
+        const temporg = await fetch('organisation/', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -95,20 +85,9 @@ const Organisation = () => {
                 createdBy: JSON.parse(localStorage.getItem('user'))._id,
             })
         })
-            .then(response => response.json())
-            .then(async (result) => {
-                temporg = {
-                    name: result.name,
-                    createdBy: JSON.parse(localStorage.getItem('user'))._id,
-                    image: result.image,
-                    createdAt: result.createdAt,
-                    _id: result._id
-                }
-                setorgs([...orgs, temporg]);
-            })
-            .catch(error => {
-                console.log(error);
-            });
+        const data = await temporg.json()
+        console.log(data)
+        setorgs([...orgs,data])
 
         fetch(`user/${JSON.parse(localStorage.getItem('user'))._id}`, {
             method: 'PATCH',
@@ -116,7 +95,7 @@ const Organisation = () => {
             body: JSON.stringify({ "orgs": [...orgs, temporg] })
         })
 
-        let temp = await fetch(`organisation/${temporg._id}`);
+        let temp = await fetch(`organisation/${data._id}`);
         let tempOrg = await temp.json();
         let members = tempOrg.members;
 
@@ -127,14 +106,14 @@ const Organisation = () => {
             _id: JSON.parse(localStorage.getItem('user'))._id
         }
 
-        fetch(`organisation/${temporg._id}`, {
+        await fetch(`organisation/${data._id}`, {
             method: 'PATCH',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ "members": [...members, newMemberAcceptObj] })
         })
 
         const a = JSON.parse(localStorage.user)
-        a.orgs = [...orgs, temporg];
+        a.orgs = [...orgs, data];
         localStorage.user = JSON.stringify(a);
 
         setNewOrgName("");
@@ -149,8 +128,6 @@ const Organisation = () => {
                     <div style={{ width: "0.7%", backgroundColor: "blue", marginRight: "8px", borderRadius: "20%" }}>.</div>
                     <h4 style={{ fontWeight: "bolder" }}>Organisations</h4>
                 </div>
-
-
 
                 <div className="orgss" style={{ display: "flex", overflowX: "auto" }}>
 
@@ -194,12 +171,12 @@ const Organisation = () => {
                                     <img src={organisation.image} style={{ height: "7vh", width: "5vh" }} alt="" />
                                     <h4>{organisation.name}</h4>
                                 </div>
-                                <p><strong>Creator: </strong>{organisation.createdBy}</p>
+                                <p><strong>Creator: </strong>{organisation.createdByName}</p>
                                 {/* <p>{formatDistanceToNow(new Date(organisation.createdAt), { addSuffix: true })}</p> */}
                             </Link>
                                 <span className="material-symbols-outlined" onClick={() => { }}>
                                     <div class="dropdown">
-                                        <button class="dropbtn" onMouseEnter={()=>{setId(organisation._id)}} onMouseLeave={()=>{setId(null)}} ><FiMoreVertical /></button>
+                                        <button class="dropbtn" onClick={()=>{console.log(organisation.createdByName)}}  onMouseEnter={()=>{setId(organisation._id)}} onMouseLeave={()=>{setId(null)}} ><FiMoreVertical /></button>
                                         <div class="dropdown-content">
                                             <button class="btn btn-dark" onClick={handleEdit}>Edit</button>
                                             <button class="btn btn-dark" onClick={handleDelete}>Delete</button>

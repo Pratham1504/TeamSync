@@ -1,5 +1,6 @@
 const Board = require('../models/board')
 const mongoose = require('mongoose')
+const UserSchema = require('../models/user')
 
 // Get all boards 
 const getBoards = async (req,res) =>{
@@ -24,15 +25,23 @@ const getBoard = async (req,res) =>{
 
 // Create new Board
 const createBoard = async (req,res) => {
-    if(req.body.length > 0){
-        return res.status(400).json({error: ' Please Fill in all the Fields',emptyFields})
+    try {
+        const id = req.body.createdBy
+        console.log(req.body)
+        const user = await UserSchema.findOne({_id:id})
+        const creatorName = user.name
+        const body = {
+            "name":`${req.body.name}`,
+            "description":`${req.body.description}`,
+            "createdById":`${id}`,
+            "createdByName":`${creatorName}`,
+            "projectId":`${req.body.projectId}`
+        }
+        const org = await Board.create(body);
+        res.status(200).json(org);
     }
-    // add doc to db
-    try{
-        const board = await Board.create(req.body)
-        res.status(200).json(board)
-    }catch(err){
-        res.status(400).json({error:err.message})
+    catch (error) {
+        res.status(201).json({ error: error.message });
     }
 }
 

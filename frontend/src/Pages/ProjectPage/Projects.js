@@ -144,7 +144,7 @@ const Projects = () => {
                     <div style={{ width: "0.7%", backgroundColor: "blue", marginRight: "8px", borderRadius: "20%" }}>.</div>
                     <h3>Projects</h3>
                 </div>
-                <div style={{ display: "flex", flexWrap: "wrap" }}>
+                <div style={{ display: "flex", overflowX: "auto" }}>
                     <div className="board-details" data-bs-toggle="modal" data-bs-target="#Create-Board" onClick={() => { }} style={{ width: "28%", fontSize: "150%", display: "flex", justifyContent: "center", alignItems: "center", backgroundColor: "#f1f1f1" }}>
                         <IoIosAddCircleOutline /> <p>New Project</p>
                     </div>
@@ -177,7 +177,7 @@ const Projects = () => {
                     </div>
                     {Projects && Projects.map((project) => (
                         <div className="board-details" style={{ width: "28%" }} onClick={updateuser.bind(this, project)} >
-                            <Link style={{ textDecoration: "none" }} to="/task" >
+                            <Link style={{ textDecoration: "none" }} to="/board" >
                                 <div style={{ display: "flex", alignItems: "center", justifyContent: "flex-start" }}>
                                     <h4>{project.name}</h4>
                                 </div>

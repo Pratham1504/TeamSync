@@ -18,9 +18,13 @@ const organisation = new schema({
         default:Date.now()
     },
 
-    createdBy:{
+    createdById:{
+            required:true,
+            type:mongoose.Schema.Types.ObjectId, ref: `user`
+    },
+    createdByName:{
         required:true,
-        type:mongoose.Schema.Types.ObjectId, ref: `user`
+        type:String
     },
     members: [
         {

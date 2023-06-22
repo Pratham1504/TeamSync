@@ -21,11 +21,14 @@ const project = new schema({
         default:date.toLocaleString()
     },
 
-    createdBy:{
+    createdById:{
         required:true,
         type:mongoose.Schema.Types.ObjectId, ref: `user`
     },
-
+    createdByName:{
+        required:true,
+        type:String
+    },
     updatedAt: {
         type: String,
         default:date.toLocaleString()

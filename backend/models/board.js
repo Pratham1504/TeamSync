@@ -23,11 +23,14 @@ const board = new schema({
         default:Date.now()
     },
 
-    createdBy:{
-            required: true,
-            type: mongoose.Schema.Types.ObjectId, ref: `User`
+    createdById:{
+        required:true,
+        type:mongoose.Schema.Types.ObjectId, ref: `user`
     },
-
+    createdByName:{
+        required:true,
+        type:String
+    },
     managerList:[
         {
             required: true,

@@ -4,9 +4,7 @@
 "TeamSync" is a cutting-edge project management website designed to streamline your project organization and collaboration needs. Users have the flexibility to create organizations, providing a structured foundation for their projects. Within these organizations, various projects can be initiated, ensuring that each initiative is well-defined and managed. The granular control continues with the ability to create multiple boards within projects, allowing users to compartmentalize tasks and workflows efficiently.
 
 What sets TeamSync apart is its robust team collaboration features. Users can seamlessly add team members to boards, ensuring everyone is on the same page and ready to contribute their expertise. Assigning tasks to specific team members is a breeze, facilitating project progress tracking and accountability. To make team expansion effortless, TeamSync also offers a user-friendly invitation system, allowing you to bring new members into your projects with ease. Experience the power of efficient project management and team synchronization with TeamSync.
-# Ideation
 
-Our team devoted a significant amount of time to discussing and refining various ideas before ultimately settling on our website's models, user interface (UI), and routes. Our primary emphasis throughout the process was on ensuring the website would effectively cater to the needs and preferences of both employees and organisations and facilitate seamless interactions between the two.
 # Features
 
 ### User-friendly Dashboard: 

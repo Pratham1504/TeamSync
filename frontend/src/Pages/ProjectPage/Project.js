@@ -7,7 +7,7 @@ import NavBar from "../navBar";
 const Project=()=>{
 return(
     <>
-    <NavBar/>
+    {/* <NavBar/> */}
     <div>
         <div style={{marginTop:"5px"}}>
             <Projects/>

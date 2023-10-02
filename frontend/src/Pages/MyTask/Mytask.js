@@ -150,7 +150,7 @@ const HomePage = () => {
     ]
     return (
         <div>
-            <NavBar />
+            {/* <NavBar /> */}
             <section class="grid mt-10 md:px-8 cols-1 md:grid-cols-2 lg:grid-cols-3 md:gap-12">
                 <div class="mb-10 md:mb-0">
                     <div style={{ display: "flex", height: "7vh", alignItems: "center", }}>

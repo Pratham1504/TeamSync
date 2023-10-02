@@ -7,14 +7,14 @@ import NavBar from "../navBar";
 const Landing=()=>{
 return(
     <>
-    <NavBar/>
+    {/* <NavBar/> */}
     <div>
         <div style={{marginTop:"5px"}}>
             <Organisation/>
         </div>
-        <div >
+        {/* <div >
             <Invites/>    
-        </div>
+        </div> */}
     </div>
     </>
 )

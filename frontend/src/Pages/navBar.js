@@ -108,7 +108,7 @@ const NavBar = () => {
                             <div style={{ display: "flex", alignItems: "center", marginRight: "2%" }}>
                                 <p style={{ marginBottom: "0" }}>org : </p><p style={{ fontSize: "120%", marginBottom: "0" }}>{orgOpen.openOrgName}</p>
                             </div>
-                        }
+                        
                         <div style={{ display: "flex", alignItems: "center", marginRight: "2%" }}>
                             {/* <CgProfile style={{ fontSize: "150%", margin: "4px" }} /> */}
                                 {user.image && <img className="navDp" src={user.image} alt="User Avatar" style={{height:"35px",width:"35px",objectFit:"scale-down"}}/>}
@@ -121,6 +121,7 @@ const NavBar = () => {
             </>
         )
     }
+}
 }
 
 export default NavBar

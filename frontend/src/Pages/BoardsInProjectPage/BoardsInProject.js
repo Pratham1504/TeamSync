@@ -7,7 +7,7 @@ import NavBar from "../navBar";
 const BoardsInProject=()=>{
 return(
     <>
-    <NavBar/>
+    {/* <NavBar/> */}
     <div>
         <div style={{marginTop:"5px"}}>
             <Boards/>

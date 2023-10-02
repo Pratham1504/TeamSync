@@ -8,10 +8,12 @@ const Organisation = () => {
     const [orgs, setorgs] = useState();
     const [newOrgName, setNewOrgName] = useState("");
     const [newOrgImage, setNewOrgImage] = useState("");
+
+    
     
     const [id,setId] = useState(null);
 
-    const handleDelete = async (e) => {
+     const handleDelete = async (e) => {
         await fetch(`organisation/${id}`, {
             method: 'DELETE',
             headers: { 'Content-Type': 'application/json' }
@@ -44,7 +46,6 @@ const Organisation = () => {
 
 
     async function updateuser(organisation) {
-
 
         const a = JSON.parse(localStorage.user)
         a.openOrg = {

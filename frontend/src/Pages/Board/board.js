@@ -90,7 +90,7 @@ const Task = () => {
         return (
 
             <>
-                <NavBar />
+                {/* <NavBar /> */}
 
                 <div className="cards">
 

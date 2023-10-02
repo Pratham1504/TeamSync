@@ -15,9 +15,6 @@ Our team devoted a significant amount of time to discussing and refining various
 ### Task Assignment: 
 - The ability to create and assign tasks within each board to different team members. Project managers can designate task owners and set due dates to ensure accountability.
 
-### Task Dependencies: 
-- Support for task dependencies, allowing project managers to define relationships between tasks. This feature helps in sequencing tasks and ensures that one task cannot start until its predecessor is completed.
-
 ### Progress Tracking: 
 - A visual progress tracking system that allows project managers and team members to monitor the status of tasks and boards at a glance. Progress bars, status labels, and notifications can help in keeping everyone informed.
 
@@ -25,8 +22,6 @@ Our team devoted a significant amount of time to discussing and refining various
 ### Prioritization and Filters: 
 - Tools for prioritizing tasks, such as the ability to set task priorities and filter tasks based on various criteria, like due date, priority, or team member. This helps in focusing on critical tasks.
 
-### Reporting and Analytics: 
-- Comprehensive reporting and analytics features to generate insights into project and team performance. Users should be able to create custom reports and export data for further analysis.
 # Tech Stack
 
 **Client:** ReactJs

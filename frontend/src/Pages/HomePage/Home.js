@@ -1,6 +1,5 @@
 //import NavBar from "../navBar";
 
-
 import React, { useState, useEffect } from 'react';
 import TaskList from "./taskList";
 import ProjectCard from "./ProjectCard";

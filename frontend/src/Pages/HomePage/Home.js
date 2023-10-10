@@ -4,38 +4,56 @@
 import React, { useState, useEffect } from 'react';
 import TaskList from "./taskList";
 import ProjectCard from "./ProjectCard";
+import  axios from 'axios'
 
 
-
-
-function DataDisplay() {
+const DataDisplay =()=> {
   const [projectsData, setProjectsData] = useState([]);
   const [tasksData, setTasksData] = useState([]);
   const [loading, setLoading] = useState(true);
+
+
+  const fetchProjects = async () => {
+    try {
+      await axios.get('http://localhost:4000/projects')
+      .then((res)=>res.json() ).
+      then( (data)=>{
+        setProjectsData(data);
+      } )
+      .catch(err=>{
+        console.log(err);
+        return err;
+      })
+    }
+    catch (error) {
+      console.error('Error fetching data:', error);
+      return error;
+    }
+  }
+
+    const fetchTasks = async () =>{
+   try {
+       await axios.get('http://localhost:4000/tasks')
+      .then((data)=>{
+        setTasksData(data);
+        setLoading(false); 
+      })
+      .catch(err=>{
+        console.log(err);
+        return err;
+      })
+    }
+    catch (error) {
+      console.error('Error fetching data:', error);
+      return error;
+    }
+    }
   
     useEffect(() => {
-        const fetchData = async () => {
-            try {
-              const response1 = await fetch('http://localhost:4000/projects');
-              if (!response1.ok) {
-                throw new Error('Network response was not ok for projects');
-              }
-              const response2 = await fetch('http://localhost:4000/tasks');
-              const projectsResult = await response1.json();
-              const tasksResult = await response2.json();
-              setProjectsData(projectsResult);
-              setTasksData(tasksResult);
-              setLoading(false); // Set loading to false when data is fetched successfully
-            } catch (error) {
-              console.error('Error fetching data:', error);
-              setLoading(false); // Set loading to false in case of an error
-            }
-      };
-  
-      fetchData();
+      fetchProjects();
+      fetchTasks();
     }, []);
 
-  
     return (
        
         <div>
@@ -60,7 +78,7 @@ function DataDisplay() {
                                         // Navigate to the task details page.
                                     }}
                                 >
-                                    <TaskList title={task.title} updatedAt={task.updatedAt} priority={task.priority} />
+                                    <TaskList title={task?.title} updatedAt={task?.updatedAt} priority={task?.priority} />
                                 </li>
                             ))}
                         </div>
@@ -88,7 +106,7 @@ function DataDisplay() {
                                         // Navigate to the task details page.
                                     }}
                                 >
-                                    <TaskList title={task.title} updatedAt={task.updatedAt} priority={task.priority} />
+                                    <TaskList title={task?.title} updatedAt={task?.updatedAt} priority={task?.priority} />
                                 </li>
                             ))}
                         </div>
@@ -112,7 +130,7 @@ function DataDisplay() {
       <ul class="overflow-auto flex">
         {projectsData.map((project) => (
           <li key={project.id}>
-            <ProjectCard id={project.id} names={project.name} description={project.description} updatedAt={project.updatedAt} boards={project.boards.length} />
+            <ProjectCard id={project?.id} names={project?.name} description={project?.description} updatedAt={project?.updatedAt} boards={project?.boards.length} />
           </li>
         ))}
       </ul>

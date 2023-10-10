@@ -52,7 +52,7 @@ const DataDisplay =()=> {
     useEffect(() => {
       fetchProjects();
       fetchTasks();
-    }, []);
+    }, [fetchProjects,fetchTasks]);
 
     return (
        

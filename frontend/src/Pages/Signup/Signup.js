@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react"
 import useSignUp from "../../hooks/useSignUp"
+import { useHistory, useNavigate } from 'react-router-dom';
 import './Signup.css'
 import lottie from 'lottie-web';
 
 
 const SignUp = () => {
     const [activeSlide, setActiveSlide] = useState(0);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -57,6 +59,7 @@ const SignUp = () => {
     const handleSubmit = async (e) => {
         e.preventDefault()
         await signup(email, password, image, name)
+        navigate("/login");
     }
 
     return (
